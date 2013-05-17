@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+   	<include file="strutsXml/achieve.xml"></include>
+	<include file="strutsXml/download.xml"></include>
+	<include file="strutsXml/dynamic.xml"></include>
+	<include file="strutsXml/exchange.xml"></include>
+	<include file="strutsXml/function.xml"></include>
+	<include file="strutsXml/index.xml"></include>
+	<include file="strutsXml/introduce.xml"></include>
+	<include file="strutsXml/team.xml"></include>
+	<include file="strutsXml/train.xml"></include>
+	<include file="strutsXml/manage.xml"></include>
+</struts>

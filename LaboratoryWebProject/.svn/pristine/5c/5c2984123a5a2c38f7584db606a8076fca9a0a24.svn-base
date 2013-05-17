@@ -1,0 +1,126 @@
+/**   
+* @Title: BasicDaoImpl.java 
+* @Package cn.edu.cdu.lab.dao.impl 
+* @Description: 该文件包含dao层基本的数据处理方法实现 
+* @author 李华
+* @date 2013-2-27 22:43:10 
+* @version V1.0   成都大学信息科学与技术学院
+*/
+package cn.edu.cdu.lab.dao.impl;
+
+/** 
+ * @ClassName: BasicDaoImpl 
+ * @Description: 该类是以后dao层的基类，封装了基本的数据处理方法 
+ * @author 李华
+ * @date 2013-2-27 22:45:20 
+ *  
+ */
+import java.sql.SQLException;
+import java.util.List;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import cn.edu.cdu.lab.dao.BasicDao;
+
+@Repository //sping的dao层注解
+public class BasicDaoImpl extends HibernateDaoSupport implements BasicDao {
+	
+	@Transactional(propagation=Propagation.REQUIRED) //spring事务管理注解
+	public void save(Object entity){
+		this.getHibernateTemplate().save(entity);
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void update(Object entity){
+		this.getHibernateTemplate().update(entity);
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void delete(Object entity){
+		this.getHibernateTemplate().delete(entity);
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void deleteAll(Class clazz){
+		List resoult = this.getHibernateTemplate().loadAll(clazz);
+		this.getHibernateTemplate().deleteAll(resoult);
+	}
+	
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
+	public List loadAll(Class clazz){
+		return this.getHibernateTemplate().loadAll(clazz); 
+	}
+	
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
+	public List query(String hql){
+		return this.getHibernateTemplate().find(hql);
+	}
+	
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
+	public List query(String hql, Object param){
+		return this.getHibernateTemplate().find(hql, param);
+	}
+	
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
+	public List query(String hql, Object[] params){
+		return this.getHibernateTemplate().find(hql, params);
+	}
+	
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
+	public List pageQuery(final String hql, final int offset, final int obtain, final Object[] params){
+		List resoult = (List) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
+			public Object doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				Query query = session.createQuery(hql);
+				if(params != null){
+					for(int i = 0; i < params.length; i++){
+						query.setParameter(i, params[i]);
+					}
+				}
+				List list = query.setFirstResult(offset).setMaxResults(obtain).list();
+				return list;
+			}
+		});
+		return resoult;
+	}
+	
+	public int affectNumber(final String hql,final Object[] params){
+		int affectNumber = (Integer) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
+			public Object doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				Query query = session.createQuery(hql);
+				if(params != null){
+					for(int i = 0; i < params.length; i++){
+						query.setParameter(i, params[i]);
+					}
+				}
+				return query.list().size();
+			}
+		});
+		return affectNumber;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

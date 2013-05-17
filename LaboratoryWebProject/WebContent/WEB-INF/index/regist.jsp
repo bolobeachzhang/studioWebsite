@@ -1,0 +1,382 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head><!-- 这是一个注册页面 ，-->
+<title>成都大学-模式识别与智能信息处理四川省高校重点实验室-注册</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="keywords" content="模式识别,智能信息,重点实验室">
+<link rel="shortcut icon" href="images/lablogo.png" />
+<link type="text/css" rel="stylesheet" href="css/base/bootstrap_modify_for_lab.css" />
+<script type="text/javascript" src="js/jquery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.wordlimitor-1.0.1.js"></script>
+<style type="text/css">
+@CHARSET "UTF-8";
+body {
+		margin: 0px;
+		padding: 0px;
+		background-image: url("images/background.jpg");
+		background-repeat: repeat;
+		width: 100%;
+		margin: 0 auto;
+}
+/* 顶部*/
+.topFream {
+		margin: 0 auto;
+		padding: 0px;
+		width: 100%;
+		height: 75px;
+		color: #fff;
+		float: left;
+		/*background-color: #0169A8;
+	*/
+		margin-bottom: 3px;
+		algin: cener;
+}
+
+#top {
+		margin: 0px;
+		padding: 0px;
+		width: 1348px;
+		height: 75px;
+		color: #fff;
+		float: left;
+}
+
+.topP {
+		width: 1100px;
+		margin-top: 10px;
+		float: left;
+}
+
+.topP a img {
+		width: 52px;
+		height: 52px;
+		z-index: 10;
+		float: left;
+		margin-left: 50px;
+}
+
+.topP span {
+		width: 550px;
+		margin: 0px;
+		padding: 0px;
+		height: 24px;
+		font-size: 24px;
+		color: #FFF;
+		margin-top: 25px;
+		margin-left: 200px;
+		float: left;
+}
+
+/* 中间框架 */
+.fream {
+		margin: 0 auto;
+		padding: 0px;
+		width: 633px;
+		height: 520px;
+		float: left;
+		/*background-color: pink;*/
+}
+
+.contentall {
+		float: left;
+		width: 633px;
+		padding: 0px;
+		height: 520px;
+		background-image: url("images/regist.png");
+}
+
+.content {
+		margin-left: 41px;
+		margin-top: 37px;
+		width: 580px;
+		height: 475px;
+}
+
+/*欢迎注册 */
+#contentT {
+		width: 100%;
+		height: 24px;
+		margin-top: 20px;
+		float: left;
+}
+
+#contentT .contentTL {
+		width: 163px;
+		float: left;
+		margin-left: 71px;
+		color: #2e529b;
+		margin-top: 10px;
+		border-color: #2e529b;
+}
+
+#contentT .contentTR {
+		width: 235px;
+		float: right;
+		color: #2e529b;
+		vertical-align: middle;
+		margin-top: 10px;
+		border-color: #2e529b;
+}
+
+/*注册的表格 */
+.tabCDiv {
+		float: left;
+		width: 510px;
+		height: 410px;
+		margin-left: 70px;
+		margin-top: 20px;
+}
+
+.mTable {
+		width: 550px;
+		float: left;
+		border: none;
+		background-color: #fff;
+}
+
+.mTable tr {
+		padding: 0px;
+		height: 27px;
+		border: none;
+}
+
+.mTable td {
+		padding: 0px;
+		height: 27px;
+		border: none;
+}
+.reLeft{
+width: 100px;
+}
+.subtn{
+	height: 30px;
+	border: none;
+	color:white;
+	background-color: #8fa1b8;
+	font-weight: bold;
+}
+.subtn:HOVER {
+	background-color: #FFD04C;	
+}
+
+/* 验证码*/
+#checkImg{
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	freamM();
+	//适应不同的屏幕的fream的边距  的方法 （freamM()） 
+	function freamM(){
+		$screenW = screen.width;//得到屏幕的宽度 
+		$screenH = screen.height;
+		$framMarginLeft = $screenW * 0.27;
+		$framMarginTop = $screenH * 0.05;
+		$(".fream").css("margin-left",$framMarginLeft);
+		$(".fream").css("margin-top",$framMarginTop);
+	}
+	
+	//验证码更换
+	var checkImg = $("#checkImg");
+	checkImg.click(function(){
+		checkImg.attr("src","SecurityCodeImageAction?timestamp="+new Date().getTime());
+	});
+	
+});
+	
+	var reg; //声明一个正则表达式匹配对象
+	
+	function check(){
+		var id = $("#idRegister");
+		if(id.val() == null || id.val() == ""){
+			$("#idResoult").html("用户ID不能为空！");
+			id.focus();
+			return false;
+		} else {
+			$("#idResoult").html("");
+		}
+		
+		reg = new RegExp("^[a-zA-Z_]+$");
+		if(!reg.test(id.val())){
+			$("#idResoult").html("ID只能为数字字母和下划线！");
+			id.focus();
+			return false;
+		} else {
+			$("#idResoult").html("");
+		}
+		
+		var name = $("#nameRegister");
+		if(name.val() == null || name.val() == ""){
+			$("#nameResoult").html("用户名不能为空！");
+			name.focus();
+			return false;
+		} else {
+			$("#nameResoult").html("");
+		}
+		
+		var pass = $("#passRegister");
+		if(pass.val() == null || pass.val() == ""){
+			$("#passResoult").html("密码不能为空！");
+			pass.focus();
+			return false;
+		} else {
+			$("#passResoult").html("");
+		}
+		
+		var repass = $("#repassRegister");
+		if(repass.val() == null || repass.val() == ""){
+			$("#repassResoult").html("确认密码不能为空");
+			repass.focus();
+			return false;
+		} else {
+			$("#repassResoult").html("");
+		}
+		if(pass.val() != repass.val()){
+			$("#repassResoult").html("确认密码必须和密码一致");
+			repass.focus();
+			return false;
+		} else {
+			$("#repassResoult").html("");
+		}
+		
+		var email = $("#email");
+		if(email.val() == null || email.val() == ""){
+			$("#emailResoult").html("邮箱地址不能为空");
+			email.focus();
+			return false;
+		} else {
+			$("#emailResoult").html("");
+		}
+		
+		reg = new RegExp("^[0-9a-zA-Z]+@[0-9a-zA-Z]+[\.]{1}[0-9a-zA-Z]+[\.]?[0-9a-zA-Z]+$");
+		if(!reg.test(email.val())){
+			$("#emailResoult").html("请填写正确的邮箱地址");
+			email.focus();
+			return false;
+		} else {
+			$("#emailResoult").html("");
+		}
+		
+		var idNumber = $("#idNumber");
+		if(idNumber.val() == null || idNumber.val() == ""){
+			$("#idNumberResoult").html("身份证号不能为空");
+			idNumber.focus();
+			return false;
+		} else {
+			$("#idNumberResoult").html("");
+		}
+		
+		reg = new RegExp("^([1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}|[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4})$");
+		if(!reg.test(idNumber.val())){
+			$("#idNumberResoult").html("请填写正确的身份证号");
+			idNumber.focus();
+			return false;
+		} else {
+			$("#idNumberResoult").html("");
+		}
+		alert(idNumber.val());
+		
+		var phone = $("#phone");
+		if(phone.val() == null || phone.val() == ""){
+			$("#phoneResoult").html("联系电话不能为空");
+			phone.focus();
+			return false;
+		} else {
+			$("#phoneResoult").html("");
+		}
+		
+		var work = $("#work");
+		if(work.val() == null || work.val() == ""){
+			$("#workResoult").html("工作单位不能为空");
+			work.focus();
+			return false;
+		} else {
+			$("#workResoult").html("");
+		}
+		
+		
+		return true;
+	}
+	
+	//验证当前输入ID是否是可用的
+	function checkID(){
+		var id = $("#idRegister");
+		if(id.val() == null || id.val() == ""){
+			$("#idResoult").html("用户ID不能为空！");
+			id.focus();
+			return false;
+		} else {
+			$("#idResoult").html("");
+		}
+		
+		var reg = new RegExp("^[a-zA-Z_]+$");
+		if(!reg.test(id.val())){
+			$("#idResoult").html("ID只能为数字字母和下划线！");
+			id.focus();
+			return false;
+		} else {
+			$("#idResoult").html("");
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: "managePersonAction_checkID",
+			data: "id="+id+"&type=2", //这里验证借用了后台人员添加的时候采用的方法
+			success: function(msg){
+				if(msg == "ok"){
+					$("#idResoult").html("该ID可用！");
+					return true;
+				} else {
+					$("#idResoult").html("该ID不可用！");
+					id.focus();
+					return false;
+				}
+			}
+		});
+	}
+</script>
+</head>
+<body>
+<!-- =======顶部========= -->
+<div class="topFream">
+	<div id="top">
+		<div class="topP">
+			<a href="frontIndexAction_index" title="返回首页"><img alt="返回" src="images/Previous.png" /></a>
+			<span>模式识别与智能信息处理四川省高校重点实验室</span>
+		</div>
+	</div>
+</div><!-- end topFream -->
+<div class="fream">
+<!--=========左边框架===========  -->
+	<div class="contentall">
+		<div class="content">
+			<div id="contentT">
+				<hr class="contentTL">
+				<font style="float: left;font-size: 20px;margin-left: 15px;">欢迎注册</font>
+				<hr class="contentTR">
+			</div><!-- end contentT -->
+			<!-- 注册的表格开始 -->
+			<div class="tabCDiv">
+					<form action="frontIndexAction_getRegist" method="post" id="registerForm" onsubmit="return check()" enctype="multipart/form-data">
+						<table id="register"  class="table table-bordered mTable">
+							<tr><td class="reLeft">用户ID：</td><td><input type="text" max="20" id="idRegister" name="register.registerId" value="用作登录名" onfocus="if(value == '用作登录名'){value = ''}" onblur="if(value == ''){value = '用作登录名'}else{checkID()}"><span class="redstr"style="color: red;">*</span><span id="idResoult"></span></td></tr>
+							<tr><td class="reLeft">用户名称：</td><td><input type="text" max="15" id="nameRegister" name="register.name" ><span class="redstr"style="color: red;">*</span><span id="nameResoult"></span></td></tr>
+							<tr><td class="reLeft">登陆密码：</td><td><input type="password" max="30" id="passRegister" name="register.password"><span class="redstr"style="color: red;">*</span><span id="passResoult"></span></td></tr>
+							<tr><td class="reLeft">确认密码：</td><td><input type="password" max="30" id="repassRegister" ><span class="redstr" style="color: red;">*</span><span id="repassResoult"></span></td></tr>
+							<tr><td class="reLeft">邮件地址：</td><td><input type="text" max="40" name="register.email" id="email"><span class="redstr" style="color: red;">*</span><span id="emailResoult"></span></td></tr>
+							<tr><td class="reLeft">身份证：</td><td><input type="text" max="20" name="register.idNumber" id="idNumber"><span class="redstr" style="color: red;">*</span><span id="idNumberResoult"></span></td></tr>
+							<tr><td class="reLeft">联系电话：</td><td><input type="text" max="20" name="register.phoneNumber" id="phone"><span class="redstr" style="color: red;">*</span><span id="phoneResoult"></span></td></tr>
+							<tr><td class="reLeft">工作单位：</td><td><input type="text" max="40" name="register.workUnit" id="work"><span class="redstr" style="color: red;">*</span><span id="workResoult"></span></td></tr>  
+							<tr><td class="reLeft">验证码  ：</td><td><input type="text" style="width: 70px;margin-right: 10px;" name="" >&nbsp;&nbsp;<img src="SecurityCodeImageAction" title="看不清?请点击图片更换" id="checkImg"/></td></tr>  
+							<tr><td colspan="2" style="text-align: center;"><input style="width: 96px;" type="submit" value="提交" class="subtn" /></td></tr>
+						</table>
+					</form>
+			</div>
+		</div>
+	</div><!-- end contentall -->
+</div><!-- end fream -->
+</body>
+</html>

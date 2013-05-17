@@ -1,0 +1,13 @@
+body {
+	margin: auto;
+}
+.div0{
+   width: 700px;
+   height: auto;
+   margin: 0 auto;
+   text-align: justify;
+   font:"宋体";
+   padding-top:5px;
+   padding-bottom: 20px;
+   /*text-indent: 2em;*/
+}

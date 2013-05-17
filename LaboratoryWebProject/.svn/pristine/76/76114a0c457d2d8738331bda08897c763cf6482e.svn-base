@@ -1,0 +1,61 @@
+package cn.edu.cdu.lab.model;
+
+import java.util.Date;
+
+/**
+ * 
+ * @author xiujiang tan
+ *采用类似属性的结构实现论坛的1对多关系
+ */
+public class Forum {
+	private Integer id;		//id自增长实现主键生成策略
+	private Integer parentId;	//标识主题和回帖的关系 主题的parentId 预设置都为0
+	private String topic_content;//主题和回帖
+	private String spokerId;			//发表主题或回帖人的id
+	private String spokerName;	//发贴或铁人的用户名
+	private String spokerType;	//发帖回帖人的类型 在插入数据库的时候直接处理成汉字，显示时候不用麻烦
+	private Date spokerTime;	//发回帖的时间
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getParentId() {
+		return parentId;
+	}
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+	public String getTopic_content() {
+		return topic_content;
+	}
+	public void setTopic_content(String topic_content) {
+		this.topic_content = topic_content;
+	}
+	public String getSpokerId() {
+		return spokerId;
+	}
+	public void setSpokerId(String spokerId) {
+		this.spokerId = spokerId;
+	}
+	public String getSpokerType() {
+		return spokerType;
+	}
+	public void setSpokerType(String spokerType) {
+		this.spokerType = spokerType;
+	}
+	public String getSpokerName() {
+		return spokerName;
+	}
+	public void setSpokerName(String spokerName) {
+		this.spokerName = spokerName;
+	}
+	public Date getSpokerTime() {
+		return spokerTime;
+	}
+	public void setSpokerTime(Date spokerTime) {
+		this.spokerTime = spokerTime;
+	}
+	
+}

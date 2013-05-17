@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>学术论坛</title>
+<link href="css/second/academicBBSindex.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<div id="div"></div>
+	<div id="div1">
+		<table class="table table-striped">
+			<tr>
+				<th style="background-color: #8fa1b8; color: #fff">主题</th>
+				<th style="background-color:  #8fa1b8; color: #fff">楼主</th>
+				<th style="background-color:  #8fa1b8; color: #fff">发表时间</th>
+			</tr>
+			<tr>
+				<td><a href="replyBBSHome.jsp">标题要长。。。。。。。。。。。。。。。。。。</a></td>
+				<td>s谁是谁</td>
+				<td>2013/03/18</td>
+			</tr>
+			<tr>
+				<td><a href="replyBBSHome.jsp">标题要长。。。。。。。。。。。。。。。。。。</a></td>
+				<td>s谁是谁</td>
+				<td>2013/03/18</td>
+			</tr>
+			<tr>
+				<td><a href="replyBBSHome.jsp">标题要长。。。。。。。。。。。。。。。。。。</a></td>
+				<td>s谁是谁</td>
+				<td>2013/03/18</td>
+			</tr>
+			<tr>
+				<td><a href="#">标题要长。。。。。。。。。。。。。。。。。。</a></td>
+				<td>s谁是谁</td>
+				<td>2013/03/18</td>
+			</tr>
+			<tr>
+				<td><a href="#">标题要长。。。。。。。。。。。。。。。。。。</a></td>
+				<td>s谁是谁</td>
+				<td>2013/03/18</td>
+			</tr>
+		</table>
+	</div>
+	<div id="div2">
+		<p class="p">发表主题</p>
+		<p class="p1">
+			标题 : <input type="text">
+		</p>
+		<p class="p1">
+			内容 :
+			<textarea></textarea>
+		</p>
+		<input type="button" class="btn" value="提交" >
+	</div>
+</body>
+</html>

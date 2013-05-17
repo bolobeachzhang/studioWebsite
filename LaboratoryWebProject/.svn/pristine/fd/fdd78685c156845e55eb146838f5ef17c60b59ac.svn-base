@@ -1,0 +1,258 @@
+package cn.edu.cdu.lab.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.edu.cdu.lab.dao.impl.BasicDaoImpl;
+import cn.edu.cdu.lab.model.Article;
+import cn.edu.cdu.lab.model.Files;
+import cn.edu.cdu.lab.model.Navigation;
+import cn.edu.cdu.lab.service.ArticleManageService;
+
+/**
+ * 
+ * @author tanxiujiang
+ *实现文章管理
+ */
+public class ArticlServiceImpl extends BasicDaoImpl implements ArticleManageService {
+	
+	//加载所有的文章列表
+	/* (non-Javadoc)
+	 * @see cn.edu.cdu.lab.service.impl.ArticleManageService#showALl()
+	 */
+	@Override
+	public List<Article> showAll()
+	{
+		List<Article> articleList = this.query("from Article order by createTime desc");
+		return articleList;
+	}
+	//加载一级导航
+	public List<Navigation> loadFirstNavigation()
+	{
+		int parentId = 0;//加载parentId为0的也就是加载一级导航所有信息
+		List<Navigation> firstNavigationList = this.query("from Navigation where parentId = "+parentId);
+		return firstNavigationList;
+	}
+	//加载2 和3级导航
+	public List<Navigation> loadSecondNavigation(int parentId)
+	{
+		String hql = "from Navigation where parentId = "+parentId;
+		List<Navigation> secondNavigationList = this.query(hql);
+		return secondNavigationList;
+	}
+	public boolean saveFile(Files file)
+	{
+		try
+		{
+			this.save(file);
+			return true;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return true;
+		}
+	}
+	public boolean saveArticle(Article article)
+	{
+		
+		try
+		{
+			this.save(article);
+			return true;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return true;
+		}
+	}
+	public boolean deleteOneArticle(int id)
+	{
+		//根据主键加载删除对象
+		Article article = (Article) this.getHibernateTemplate().get(Article.class, id);
+		//执行删除对象
+		try {
+			this.delete(article);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	//返回单个文章信息
+	public Article loadOneArticle(int id)
+	{ 
+		String hql = "from Article where id = "+id+" order by createTime desc";
+		List<Article> artticleList = this.query(hql);
+		Article article = artticleList.get(0);
+		return article;
+	}
+	//确认修改文章内容
+	public void updateArticle(Article article)
+	{
+		this.update(article);
+	}
+	//分页显示文章列表信息
+	public List<Article> ArticleBypage(Object entity, int offset, int obtain, Object[] params)
+	{
+		if(entity.equals(Article.class))
+		{
+			return this.pageQuery("from Article order by createTime desc", offset, obtain, params);//返回的是分页显示结果信息
+		}
+		else
+		{
+			return null;
+		}
+	}
+	//获取文章的记录数
+	public int getArticleCount(Object entity, int obtain)
+	{
+		
+		if(entity.equals(Article.class))
+		{
+			int rowSize = this.affectNumber("from Article" , null);
+			return rowSize % obtain == 0 ? rowSize/obtain :rowSize/obtain + 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	//根据文章的导航的
+	public  List<Article> loadArticleByPage_Navi(int firstId,int secondId,int thirdId,int offset, int obtain)
+	{
+		List<Article> articleByfirst = new ArrayList<Article>();
+		if(firstId !=0)
+		{
+			if(secondId != 0)
+			{
+				if(thirdId != 0)
+				{
+					//根据三级导航信息加载文章列表信息
+					String hql = "from Article where firstId = "+firstId+" and secondId = "+ secondId +" and thirdId = "+thirdId+" order by createTime desc";
+					articleByfirst = this.pageQuery(hql, offset, obtain,null);//返回的是分页显示结果信息
+					System.out.println("service方法中获取;"+articleByfirst.size());
+					return articleByfirst;
+					
+				}
+				else
+				{
+					//根据一和二级导航加载文章列表信息
+					String hql = "from Article where firstId = "+firstId+" and secondId = "+ secondId+" order by createTime desc";
+					articleByfirst = this.pageQuery(hql, offset, obtain,null);//返回的是分页显示结果信息
+					return articleByfirst;
+				}
+			}
+			else
+			{
+				//仅仅根据一级导航加载文章列表
+				String hql = "from Article where firstId = "+firstId+" order by createTime desc";
+				articleByfirst = this.pageQuery(hql, offset, obtain,null);//返回的是分页显示结果信息
+				return articleByfirst;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
+	//根据导航获取文章的记录数
+	public int getArticleCountByNavi(int firstId,int secondId,int thirdId,int obtain)//参数是 obtain = pageSize
+	{
+		if(firstId !=0)
+		{
+			if(secondId != 0)
+			{
+				if(thirdId != 0)
+				{
+					//根据三级导航信息加载文章列表信息
+					String hql = "from Article where firstId = "+firstId+" and secondId = "+ secondId +" and thirdId = "+thirdId;
+					int rowSize = this.affectNumber(hql , null);
+					return rowSize % obtain == 0 ? rowSize/obtain :rowSize/obtain + 1;
+				}
+				else
+				{
+					//根据一和二级导航加载文章列表信息
+					String hql = "from Article where firstId = "+firstId+" and secondId = "+ secondId;
+					int rowSize = this.affectNumber(hql , null);
+					return rowSize % obtain == 0 ? rowSize/obtain :rowSize/obtain + 1;
+				}
+			}
+			else
+			{
+				//仅仅根据一级导航加载文章列表
+				String hql = "from Article where firstId = "+firstId;
+				int rowSize = this.affectNumber(hql , null);
+				return rowSize % obtain == 0 ? rowSize/obtain :rowSize/obtain + 1;
+			}
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	//根据关键词收索功能的实现
+	public List<Article> searchArticleByTitle(String keyWords,int offset, int obtain)
+	{
+		String hql = "from Article where title like '%"+keyWords+"%'" +" order by createTime desc";
+		
+		List<Article> articleByKey = this.pageQuery(hql, offset, obtain, null);
+		return articleByKey;
+	}
+	//根据关键词返回符合要求的记录条数的pageCount
+	public int getArticleCountByKeyWords(String keyWords,int pageSize)
+	{
+		String hql = "from Article where title like '%"+keyWords+"%'";
+		int rowSize = this.affectNumber(hql , null);
+		return rowSize % pageSize == 0 ? rowSize/pageSize :rowSize/pageSize + 1;
+	}
+	//根据导航信息加载单篇文章
+	
+	public Article getOneArticleByNavi(int firstId,int secondId,int thirdId)
+	{
+		Article article = new Article();
+		String hql = "from Article where firstId = "+firstId+" and secondId = "+ secondId +" and thirdId = "+thirdId+" order by createTime desc";
+		article = (Article) this.query(hql).get(0);
+		return article;
+	}
+	
+//根据导航信息加载一类导航的文章
+	
+	public List<Article> getManyArticleByNavi(int firstId,int secondId,int thirdId)
+	{
+		List<Article> articleByfirst = new ArrayList<Article>();
+		if(firstId !=0)
+		{
+			if(secondId != 0)
+			{
+				if(thirdId != 0)
+				{
+					//根据三级导航信息加载文章列表信息
+					String hql = "from Article where firstId = "+firstId+" and secondId = "+ secondId +" and thirdId = "+thirdId+" order by createTime desc";
+					articleByfirst = this.query(hql);
+					return articleByfirst;
+					
+				}
+				else
+				{
+					//根据一和二级导航加载文章列表信息
+					String hql = "from Article where firstId = "+firstId+" and secondId = "+ secondId+" order by createTime desc";
+					articleByfirst = this.query(hql);
+					return articleByfirst;
+				}
+			}
+			else
+			{
+				//仅仅根据一级导航加载文章列表
+				String hql = "from Article where firstId = "+firstId+" order by createTime desc";
+				articleByfirst = this.query(hql);
+				return articleByfirst;
+			}
+		}
+		else
+		{
+			return null;
+		}
+	}
+}

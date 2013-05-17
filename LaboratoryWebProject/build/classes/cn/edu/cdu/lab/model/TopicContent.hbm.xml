@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="cn.edu.cdu.lab.model">
+	<class name="TopicContent" table="topicContent">
+		<id name="id">
+			<column name="id"></column>
+			<generator class="identity" />
+		</id>
+		<property name="spkoerId">
+			<column name="spkoerId" length="30"  not-null="true" ></column>
+		</property>
+		<property name="spoker">
+			<column name="spoker" length="15" not-null="true"></column>
+		</property>
+		<property name="spokerType">
+			<column name="spokerType"  not-null="true"></column>
+		</property>
+		<property name="spokerTime">
+			<column name="spokerTime"  not-null="true"></column>
+		</property>
+		<property name="contet">
+			<column name="contet"  not-null="false"></column>
+		</property>
+		<!-- 充当外键的字段名字 -->
+		<many-to-one name="topic"
+			 column="topicId"	
+			 class="cn.edu.cdu.lab.model.Topic"
+			 cascade="all"
+			 />
+			
+	</class>
+</hibernate-mapping>

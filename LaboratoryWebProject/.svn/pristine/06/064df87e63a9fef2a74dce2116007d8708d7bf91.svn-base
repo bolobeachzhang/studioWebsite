@@ -1,0 +1,83 @@
+package cn.edu.cdu.lab.action;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
+import cn.edu.cdu.lab.model.Article;
+import cn.edu.cdu.lab.model.Student;
+import cn.edu.cdu.lab.service.ArticleManageService;
+import cn.edu.cdu.lab.service.PersonService;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class FrontTrainAction extends ActionSupport{
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	private ArticleManageService articleManageService;//文章显示的service方法注入
+	public ArticleManageService getArticleManageService() {
+		return articleManageService;
+	}
+
+	public void setArticleManageService(ArticleManageService articleManageService) {
+		this.articleManageService = articleManageService;
+	}
+
+	private PersonService personService;
+	private List<Student> outstandings;
+	private List<Student> graduates;
+	
+	public void setPersonService(PersonService personService) {
+		this.personService = personService;
+	}
+
+	public String getTrain(){
+		init();
+		String section = request.getParameter("section");
+		
+		request.setAttribute("section", section);
+		return "getTrainSuccess";
+	}
+	
+	public String part(){
+		init();
+		//人才培养   7 
+		
+		int section = Integer.parseInt(request.getParameter("section"));
+		//学生概况  38   貌似这个需要加载文章显示效果    备注：单篇文章
+		if(section == 1){
+			//加载一篇文章即可
+			int firstId = 7;
+			int secondId = 38;
+			int thirdId = 0;
+			Article article = articleManageService.getOneArticleByNavi(firstId, secondId, thirdId);
+			request.setAttribute("article", article);
+			return "partOne";
+		}
+		//杰出学生  39
+		if(section == 2){
+			outstandings = personService.getOutstandingStudent();
+			request.setAttribute("outstandings", outstandings);
+			return "partTwo";
+		}
+		//研究生  40
+		if(section == 3){
+			graduates = personService.getGraduate();
+			request.setAttribute("graduates", graduates);
+			return "partThree";
+		}
+		return NONE;
+	}
+	
+	public void init(){
+		ActionContext act =  ActionContext.getContext();
+		request = (HttpServletRequest) act.get(ServletActionContext.HTTP_REQUEST);
+		response = (HttpServletResponse) act.get(ServletActionContext.HTTP_RESPONSE);
+		response.setContentType("text/html");//设置返回相应格式，很重要 
+		response.setCharacterEncoding("utf-8");
+	}
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="cn.edu.cdu.lab.model">
+	<class name="Topic" table="Topic" dynamic-insert="true" dynamic-update="true">
+		<id name="topicId">
+			<column name="topicId"></column>
+			<generator class="identity" />
+		</id>
+		<property name="topic">
+			<column name="topic" length="50"  not-null="true" ></column>
+		</property>
+		<property name="creatorId">
+			<column name="creatorId" not-null="true"></column>
+		</property>
+		<property name="creator">
+			<column name="creator" length="15" not-null="true"></column>
+		</property>
+		<property name="creatorType">
+			<column name="creatorType" not-null="true"></column>
+		</property>
+		<property name="createTime">
+			<column name="createTime" not-null="true" default="getdate()"></column>
+		</property>
+		<!-- name:表示属性名字   class:表示被关联的类名称   property-ref:指定关联类的属性名称 -->
+		<one-to-one name="topicContent"
+			class="cn.edu.cdu.lab.model.TopicContent"
+			property-ref="topic"
+			/>
+	</class>
+</hibernate-mapping>

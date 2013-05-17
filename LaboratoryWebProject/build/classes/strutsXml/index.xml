@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <package name="index" extends="struts-default">
+    	<!-- 登录和退出 -->
+    	<action name="frontIndexAction_*" class="frontIndexAction" method="{1}"> 
+    	    <!-- 后台跳转 -->
+    	    <result name="MSuccess">/WEB-INF/manage/mainM.jsp</result>
+    	    <result name="TSuccess">/WEB-INF/manage/mainT.jsp</result>
+    	    <result name="SSuccess">/WEB-INF/manage/mainS.jsp</result>
+    	    <result name="RSuccess">/WEB-INF/manage/mainR.jsp</result>
+    	    <!-- 前台跳转 -->
+    	    <result name="indexSuccess">/WEB-INF/index/index.jsp</result>
+    	    <!-- 留言跳转 -->
+    	    <result name="getMessageSuccess">/WEB-INF/index/messageMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/index/message.jsp</result>
+    	    <result name="partTwo">/WEB-INF/index/connection.jsp</result>
+    	    <!-- 登录跳转 -->
+    	    <result name="loginSuccess">/WEB-INF/index/login.jsp</result>
+    	    <result name="checkLoginSuccess" type="chain">frontIndexAction_index</result>
+    	    <!-- 退出跳转 -->
+    	    <result name="logoutSuccess" type="chain">frontIndexAction_index</result>
+    	    <!-- 注册跳转 -->
+    	    <result name="registSuccess">/WEB-INF/index/regist.jsp</result>
+    	    <result name="getRegistSuccess" type="chain">frontIndexAction_index</result>
+    	    <result name="loginError" type="chain">frontIndexAction_login</result>
+    	</action> 
+    	<!-- 实验室介绍 -->
+    	<!-- cn.edu.cdu.lab.action.FrontIntroduceAction -->
+    	<action name="frontIntroduceAction_*" class="FrontIntroduceAction" method="{1}"> 
+    	    <result name="getIntroSuccess">/WEB-INF/introduce/LabIntroduceMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/introduce/LaboratoryGaiK.jsp</result>
+    	    <result name="partTwo">/WEB-INF/introduce/Organization.jsp</result>
+    	    <result name="partThree">/WEB-INF/introduce/XueShuTop.jsp</result>
+    	    <result name="partFour">/WEB-INF/introduce/LaboratoryMaster.jsp</result>
+    	</action> 
+    	<!-- 最新动态 -->
+    	<!-- cn.edu.cdu.lab.action.FrontDynamicAction -->
+    	<action name="frontDynamicAction_*" class="FrontDynamicAction" method="{1}"> 
+    	    <result name="getDynamicSuccess">/WEB-INF/dynamic/dynamicMain.jsp</result>
+    	    
+    	    <result name="partOne">/WEB-INF/dynamic/industryDynamics.jsp</result>
+    	    <result name="partTwo">/WEB-INF/dynamic/laboratoryNews.jsp</result>
+    	    <result name="partThree">/WEB-INF/dynamic/innovationCulture.jsp</result>
+    	    <result name="partFour">/WEB-INF/dynamic/noticeNnnouncement.jsp</result>
+    	</action>
+    	<!-- 科研成果 -->
+    	<action name="frontAchieveAction_*" class="cn.edu.cdu.lab.action.FrontAchieveAction" method="{1}"> 
+    	    <result name="getAchieveSuccess">/WEB-INF/achieve/achieveMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/achieve/achievePaper.jsp</result>
+    	    <result name="partTwo">/WEB-INF/achieve/prize.jsp</result>
+    	    <result name="partThree">/WEB-INF/achieve/others.jsp</result>
+    	    
+    	    <result name="getThesisInfo">/WEB-INF/achieve/thesis.jsp</result>
+    	</action>
+    	<!-- 人才培养 -->
+    	<!-- cn.edu.cdu.lab.action.FrontTrainAction -->
+    	<action name="frontTrainAction_*" class="FrontTrainAction" method="{1}"> 
+    	    <result name="getTrainSuccess">/WEB-INF/train/trainMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/train/studentIntroduce.jsp</result>
+    	    <result name="partTwo">/WEB-INF/train/outstandingStudent.jsp</result>
+    	    <result name="partThree">/WEB-INF/train/graduate.jsp</result>
+    	</action>
+    	<!-- 下载中心 -->
+    	<action name="frontDownloadAction_*" class="cn.edu.cdu.lab.action.FrontDownloadAction" method="{1}"> 
+    	    <result name="getDownloadSuccess">/WEB-INF/download/downloadMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/download/coursewareDownload.jsp</result>
+    	    <result name="partTwo">/WEB-INF/download/toolsDownload.jsp</result>
+    	    <result name="partThree">/WEB-INF/download/formOrTableDownload.jsp</result>
+    	    <result name="download" type="stream"> 
+                <param name="contentType">application/octet-stream</param>  
+                <param name="inputName">inputStream</param> 
+                <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>  
+                <param name="bufferSize">50*1024*1024</param>
+                <param name=" maximumSize ">94371840</param>
+            </result> 
+    	</action>
+    	
+    		<!-- 研究队伍 -->
+    		<action name="frontTeamAction_*" class="frontTeamAction" method="{1}"> 
+    	    <result name="getTeamSuccess">/WEB-INF/team/teamMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/team/Research.jsp</result>
+    	    <result name="partTwo">/WEB-INF/team/professional.jsp</result>
+    	    <result name="partThree">/WEB-INF/team/post.jsp</result>
+    	    
+    	    <result name="separtOne">/WEB-INF/team/Research.jsp</result>
+    	    <result name="separtTwo">/WEB-INF/team/Researchtwo.jsp</result>
+    	    <result name="separtThree">/WEB-INF/team/Researchthree.jsp</result>
+    	    
+    	    <result name="getTeacherInclude">/WEB-INF/team/personalDetailsPageIncluded.jsp</result>
+    	    
+    	    <result name="getMessageForT">/WEB-INF/team/messageForTeacher.jsp</result>
+    	</action>
+    	<!-- 合作交流 -->
+    	<!-- class="cn.edu.cdu.lab.action.FrontExchangeAction" -->
+    	<action name="frontExchangeAction_*" class="FrontExchangeAction" method="{1}"> 
+    	    <result name="getExchangeSuccess">/WEB-INF/exchange/exchangeMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/exchange/openSubject.jsp</result>
+    	    <result name="partTwo">/WEB-INF/exchange/cooperationProjects.jsp</result>
+    	    <result name="partThree">/WEB-INF/exchange/academicExchangeConference.jsp</result>
+    	    <result name="partFour">/WEB-INF/exchange/academicBBSindex.jsp</result>
+    	    <result name="separtOne">/WEB-INF/exchange/academicExchangeConference.jsp</result>
+    	    <result name="separtTwo">/WEB-INF/exchange/academicExchangeLecture.jsp</result>
+    	    <!-- 查看主题下的分页回帖信息 -->
+    	    <result name="showContent">/WEB-INF/exchange/replyBBS.jsp</result>
+    	    <!-- 点击显示文章详细 -->
+    	     <result name="showArticleDetail">/WEB-INF/exchange/showDetail.jsp</result>
+    	</action>
+    </package>
+
+</struts>
+

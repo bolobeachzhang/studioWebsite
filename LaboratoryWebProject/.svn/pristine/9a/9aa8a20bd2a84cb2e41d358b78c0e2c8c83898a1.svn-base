@@ -1,0 +1,148 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.wordlimitor-1.0.1.js"></script>
+<link href="css/base/bootstrap_modify_for_lab.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+	function check(){
+		var headLine = $("#headLine");
+		if(headLine.val() == "" || headLine == null){
+			$("#rheadLine").html("论文标题不能为空");
+			headLine.focus();
+			return false;
+		} else {
+			$("#rheadLine").html("");
+		}
+		
+		var journalTitle = $("#journalTitle");
+		if(journalTitle.val() == "" || journalTitle == null){
+			$("#rjournalTitle").html("期刊名称不能为空");
+			journalTitle.focus();
+			return false;
+		} else {
+			$("#rjournalTitle").html("");
+		}
+		
+		var time = $("#time");
+		if(time.val() == "" || time == null){
+			$("#rtime").html("论文发表时间不能为空");
+			time.focus();
+			return false;
+		} else {
+			$("#rtime").html("");
+		}
+		
+		//判断时间
+		var mDate = new Date();
+		var a_year = mDate.getFullYear();
+		var a_month = mDate.getMonth();
+		var a_day = mDate.getDate();
+		var gDate = time.split('-');
+		var d1 = new Date(gDate[0],gDate[1],gDate[3]);
+		var d2 = new Date(a_year,a_month,a_day);
+		if(d1 < d2){
+			$("#rtime").html("论文发表时间不能小于系统当前时间");
+			time.focus();
+			return false;
+		}
+		
+		var author = $("#author");
+		if(author.val() == "" || author == null){
+			$("#rauthor").html("论文作者不能为空");
+			author.focus();
+			return false;
+		} else {
+			$("#rauthor").html("");
+		}
+		
+		var digest = $("#digest");
+		if(digest.val() == "" || digest == null){
+			$("#rdigest").html("论文摘要不能为空");
+			digest.focus();
+			return false;
+		} else {
+			$("#rdigest").html("");
+		}
+		
+		var file = $("#file");
+		if(file.val() == "" || file == null){
+			$("#rfile").html("请选择相应的上传文件");
+			file.focus();
+			return false;
+		} else {
+			$("#rfile").html("");
+		}
+		return true;
+	}
+</script>
+<style type="text/css">
+	.mTable{
+		width: 700px;
+		margin-left: 25px;
+		margin-top: 20px;
+	}
+	.mTable td{
+		padding: 0px;
+	}
+	.mTable textarea{
+		width: 350px;
+		height: 230px;
+	}
+	.redstr{
+		color: red;
+	}
+</style>
+</head>
+<body>
+	<c:if test="${requestScope.success != null}">
+		<c:out value="${requestScope.success }"></c:out> 
+	</c:if>
+	<form action="manageThesisAction_uploadDeal" method="post" enctype="multipart/form-data" onsubmit="return check(this)"> 
+	<table id="table"  class="table table-striped table-bordered mTable">
+		<tr><td>论文标题：</td><td><input id="headLine" type="text" name="thesis.headLine" max="50"><span class="redstr">*</span><span id="rheadLine"></span></td></tr>
+		<tr><td>论文类型：</td><td>
+								<select name="thesis.type">
+									<option value="1">一般期刊</option>
+									<option value="2">核心期刊</option>
+									<option value="4">EI</option>
+									<option value="8">SIC</option>
+								</select><span class="redstr">*</span>
+							  </td></tr>
+		<tr><td>期刊名称：</td><td><input id="journalTitle" type="text" name="thesis.journalTitle" max="50"><span class="redstr">*</span><span id="rjournalTitle"></span></td></tr>
+		<tr><td>发表时间：</td><td><input id="time" type="text" name="thesis.time" onClick="WdatePicker()"><span class="redstr">*</span><span id="rtime"></span></td></tr> 
+		<tr><td>论文作者：</td><td><input id="author" type="text" name="thesis.author" max="50"><span class="redstr">*</span><span id="rauthor"></span></td></tr>
+		<tr><td>论文摘要：</td><td><textarea id="digest" name="thesis.digest" max="4000"></textarea><span class="redstr">*</span><span id="rdigest"></span></td></tr>
+		<tr><td>下载权限：</td><td>
+							  	<select name="thesis.downrole">
+									<option value="1">全部人员</option>
+									<option value="2">学生、教师和注册人员</option>
+									<option value="4">学生和教师</option>
+									<option value="8">教师</option>
+								</select><span class="redstr">*</span>
+							  </td></tr>
+		<tr><td>上传论文：</td><td><input id="file" type="file" name="mfile"><span class="redstr">*</span><span id="rfile"></span></td></tr>
+		<tr><td><input type="submit" class="btn"> <input type="reset" class="btn"></td></tr>
+	</table>
+	</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

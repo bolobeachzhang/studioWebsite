@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="cn.edu.cdu.lab.model">
+	<class name="AboutUs" table="aboutUs" >
+		<id name="id">
+			<column name="id"></column>
+			<generator class="identity" />
+		</id>
+		<property name="copyRight">
+			<column name="copyRight" length="100"  not-null="true" ></column>
+		</property>
+		<property name="address">
+			<column name="address" length="100" not-null="true"></column>
+		</property>
+		<property name="postCode">
+			<column name="postCode" length="20" not-null="false" ></column>
+		</property>
+		<property name="phoneNuber">
+			<column name="phoneNuber" length="100" not-null="false"></column>
+		</property>
+		<property name="fax">
+			<column name="fax" length="60" not-null="false"></column>
+		</property>
+		<property name="webSite">
+			<column name="webSite" length="100" not-null="false"></column>
+		</property>
+		<property name="icpRecode">
+			<column name="icpRecode" length="100" not-null="false"></column>
+		</property>
+		<property name="mailBox">
+			<column name="mailBox"  length="100" not-null="false"></column>
+		</property>
+	</class>
+</hibernate-mapping>
+ 

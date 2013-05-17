@@ -1,0 +1,95 @@
+package cn.edu.cdu.lab.service.impl;
+
+import java.util.List;
+
+import cn.edu.cdu.lab.dao.impl.BasicDaoImpl;
+import cn.edu.cdu.lab.model.Files;
+import cn.edu.cdu.lab.service.FileManageService;
+
+public class FileManageServiceImpl extends BasicDaoImpl implements FileManageService {
+	
+	/* (non-Javadoc)
+	 * @see cn.edu.cdu.lab.service.impl.FileManageService#saveFile(cn.edu.cdu.lab.model.Files)
+	 */
+	@Override
+	public void saveFile(Files file) throws Exception {	//保存文件
+		this.save(file);
+	}
+	
+	/* (non-Javadoc)
+	 * @see cn.edu.cdu.lab.service.impl.FileManageService#deleteFile(cn.edu.cdu.lab.model.Files)
+	 */
+	@Override
+	public void deleteFile(Files file) throws Exception{	//删除文件
+		this.delete(file);
+	}
+	
+	/* (non-Javadoc)
+	 * @see cn.edu.cdu.lab.service.impl.FileManageService#listFiles(java.lang.String)
+	 */
+	@Override
+	public List<Files> listFiles(String hql){
+		//hql	查询语句
+		//offset	//其实位置
+		//obtain	//获得的记录数
+		//null
+		return this.query(hql);	//返回文件对象的列表
+	}
+	
+	/* (non-Javadoc)
+	 * @see cn.edu.cdu.lab.service.impl.FileManageService#downloadFile()
+	 */
+	@Override
+	public void downloadFile(){
+		
+	}
+
+	@Override
+	public void updateFile(Files file) throws Exception {
+		// TODO Auto-generated method stub
+		this.update(file);
+	}
+	@Override
+	public String getFileSize(long size){//upload.php,line26:设置文件大小的返回形式
+		String fileSize = null;
+		if(size >= 0 && size < 1024){
+			fileSize = size+"B";
+		}else if(size >= 1024 && size < 1024*1024){
+			fileSize = ((size)/(1024))+"KB";
+		}else if(size >= (1024*1024) && size < (1024*1024*1024)){
+			fileSize = ((size*100)/(1024*1024))*0.01+"MB";
+		}else if(size >= 1024*1024*1024 && size < 1024*1024*1024*1024){
+			fileSize = ((size*100)/(1024*1024*1024))*0.01+"GB";
+		}
+		return fileSize;
+	}
+
+	@Override
+	public void check(int fileId) {
+		Files file  = listFiles("from Files where id="+fileId).get(0);	//查询当前文件对象
+		int checkId = file.getChecks();	//审核就赋值
+		if(0 == checkId ){
+			try {
+				file.setChecks(1);
+				updateFile(file);	//更新对象
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public int getPageCount(String hqlCount,int pageSize) throws Exception {
+			return ((this.listFiles(hqlCount).size()+1)/pageSize);
+	}
+
+	@Override
+	public List<Files> listPageFiles(String hql, int offset, int pageSize) throws Exception {
+		return this.pageQuery(hql, offset, pageSize, null);	//返回分页后的记录数	
+	}
+
+	@Override
+	public int getRowCount(String hqlCount) throws Exception {
+		return this.listFiles(hqlCount).size();
+	}
+}

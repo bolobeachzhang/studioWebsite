@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="cn.edu.cdu.lab.model">
+	<class name="Teacher" table="teacher" lazy="false">
+		<id name="teacherId">
+			<column name="teacherId" length="30"></column>
+			<generator class="assigned" />
+		</id>
+		<property name="name">
+			<column name="name" length="15"  not-null="true" ></column>
+		</property>
+		<property name="password">
+			<column name="password" length="40" not-null="true"></column>
+		</property>
+		<property name="email">
+			<column name="email" length="40" not-null="false"></column>
+		</property>
+		<property name="phoneNumber">
+			<column name="phoneNumber" length="40" not-null="false"></column>
+		</property>
+		<property name="sex">
+			<column name="sex" length="6" not-null="false"></column>
+		</property>
+		<property name="pictureUrl">
+			<column name="pictureUrl" length="600" not-null="false"></column>
+		</property>
+		<property name="introduction">
+			<column name="introduction" not-null="false"></column>
+		</property>
+		<property name="age">
+			<column name="age" not-null="false"></column>
+		</property>
+		<property name="research">
+			<column name="research"  length="100" not-null="false"></column>
+		</property>
+		<property name="title">
+			<column name="title"  length="50" not-null="false"></column>
+		</property>
+		<property name="post">
+			<column name="post"  length="50" not-null="false"></column>
+		</property>
+		
+	</class>
+</hibernate-mapping>

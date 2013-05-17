@@ -1,0 +1,30 @@
+这个文件是用于说明项目特别注意的地方
+
+1.jsp页面文件夹与网页模块
+	jsp页面全部位于WEB-INF文件夹下
+	WEB-INF/achieve --> 科研成果
+	WEB-INF/download --> 下载中心
+	WEB-INF/dynamic --> 最新动态
+	WEB-INF/exchange --> 合作交流
+	WEB-INF/function --> 用户功能
+	WEB-INF/index --> 首页
+	WEB-INF/introduce --> 实验室介绍
+	WEB-INF/team --> 研究队伍
+	WEB-INF/train --> 人才培养
+	WEB-INF/manage -->后台管理
+	
+2.struts2的xml配置文件与网页模版
+	struts2的配置文件在src/strutsXml
+	src/strutsXml/achieve.xml --> 科研成果
+	src/strutsXml/download.xml --> 下载中心
+	src/strutsXml/dynamic.xml --> 最新动态
+	src/strutsXml/exchange.xml --> 合作交流
+	src/strutsXml/function.xml --> 用户功能
+	src/strutsXml/index.xml --> 首页
+	src/strutsXml/introduce.xml --> 实验室介绍
+	src/strutsXml/team.xml --> 研究队伍
+	src/strutsXml/train.xml --> 人才培养
+	
+	
+	3.李华添加测试
+	

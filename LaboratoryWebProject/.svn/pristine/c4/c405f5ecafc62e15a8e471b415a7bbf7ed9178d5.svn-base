@@ -1,0 +1,127 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link type="text/css" rel="stylesheet" href="css/base/bootstrap_modify_for_lab.css" />
+<style type="text/css">
+	#mform{
+		width: 93%;
+		height: 215px;
+	}
+	#mform span{
+		float: left;
+		margin-left: 53px;
+	}
+	#mform #nickname{
+		float: left;
+		margin-left: 53px;
+		margin-top: 5px;
+	}
+	#mform #code{
+		margin-top: 5px;
+	}
+	#mform textarea{
+		float: left;
+		margin-left: 53px;
+		width: 640px;
+		height: 100px;
+	}
+	#mform .btn{
+		float: right;
+		margin-right: 20px;
+	}
+	.partLine{
+		border: 1px solid #9C4E4E;
+		width: 653px;
+		margin-left: 53px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.message{
+		width: 653px;
+		height:auto !important;
+		min-height:150px;
+		height:150px;
+		margin-left: 53px;
+		position: relative;
+		border: 1px solid black;
+		margin-top: 20px;
+	}
+	.message .messager{
+		float: left;
+		color: #994848;
+	}
+	.message .messageCon{
+		width: 480px;
+		float: left;
+		text-align: left;
+	}
+	.message .messageTime{
+		float: right;
+	}
+	.message .devideLine{
+		color: #D7B8B8;
+		margin-left: 75px;
+	}
+	.replay{
+		width: 575px;
+		margin-left: 78px;
+	}
+	.replay .replayName{
+		float: left;
+		color: #994848;
+	}
+	.replay .replayCon{
+		float: left;
+		width: 395px;
+		text-align: left;
+	}
+	.replay .replayTime{
+		float: right;
+	}
+</style>
+</head>
+<body>
+	<img id="headline" alt="" src="images/line.png">
+	
+ 	<div id="mform">
+ 		<form action="" method="post">
+	 		<span>给我们留言：</span><br>
+			<div id="nickname">昵称：<input type="text"></div>
+			<div id="code">验证码：<input type="text"><img alt="验证码" src=""></div>
+			<textarea ></textarea>
+			<input type="submit" value="提交留言" class="btn"> 
+		</form>
+	</div>
+	
+	<div class="partLine"></div>
+	
+	<div class="message">
+		<div class="messager">KKK(游客)：</div>
+		<div class="messageCon">这的市场上的讽刺的饭这是留言内的的市场这是留言内的的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭这是留言内的的市场这是留言内的的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭这是留言内的的市场的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭</div>
+		<div class="messageTime">(2013-3-22)</div>
+		<div class="devideLine">*·········································································································································································</div>
+		<div class="replay">
+			<div class="replayName">管理员回复：</div>
+			<div class="replayCon">这是留言内的的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭</div>
+			<div class="replayTime">(2013-3-22)</div>
+		</div>
+	</div>
+	
+	<div class="message">
+		<div class="messager">KKK(游客)：</div>
+		<div class="messageCon">这是留言内的的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭</div>
+		<div class="messageTime">(2013-3-22)</div>
+		<div class="devideLine">*·········································································································································································</div>
+		<div class="replay">
+			<div class="replayName">管理员回复：</div>
+			<div class="replayCon">这是留言内的的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭这是留言内的的市场上的讽刺的饭</div>
+			<div class="replayTime">(2013-3-22)</div>
+		</div>
+	</div>
+</body>
+</html>

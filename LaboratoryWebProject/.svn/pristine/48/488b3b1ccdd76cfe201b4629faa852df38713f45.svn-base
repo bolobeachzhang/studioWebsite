@@ -1,0 +1,75 @@
+package cn.edu.cdu.lab.service;
+
+import java.util.List;
+
+import cn.edu.cdu.lab.model.Article;
+import cn.edu.cdu.lab.model.Files;
+import cn.edu.cdu.lab.model.Navigation;
+
+public interface ArticleManageService {
+
+	//加载所有的文章列表
+	public  List<Article> showAll();
+	/**
+	 * 加载一级导航信息
+	 * @return List<Article>
+	 */
+	public List<Navigation> loadFirstNavigation();
+	/**
+	 * 加载2级和3级导航信息
+	 * @param parentId
+	 * @return	List<Navigation>
+	 */
+	public  List<Navigation> loadSecondNavigation(int parentId);
+	/**
+	 *保存文件信息
+	 * @param file
+	 * @return boolean
+	 */
+	public boolean saveFile(Files file);
+	/**
+	 * 保存文章信息
+	 * @param article
+	 * @return	boolean
+	 */
+	public boolean saveArticle(Article article);
+	/**
+	 * 删除单个的文章信息
+	 * @param id
+	 * @return
+	 */
+	public boolean deleteOneArticle(int id);
+	/**
+	 * 加载单个的文章信息
+	 * @return
+	 */
+	public Article loadOneArticle(int id);
+	/**
+	 * 修改文章信息
+	 */
+	public void updateArticle(Article article);
+	/**
+	 * 分页显示文章列表的数据库信息
+	 */
+	public List<Article> ArticleBypage(Object entity, int offset, int obtain, Object[] params);
+	/**
+	 * 获取文章的记录数
+	 */
+	public int getArticleCount(Object entity, int obtain);
+	/**
+	 * 根据导航信息加载文章列表
+	 */
+	public  List<Article> loadArticleByPage_Navi(int firstId,int secondId,int thirdId,int offset, int obtain);
+	/**
+	 * 根据导航信息获取对应的记录条数
+	 */
+	public int getArticleCountByNavi(int firstId,int secondId,int thirdId,int obtain);
+	/**
+	 * 根据关键字来返回pageCount
+	 */
+	public int getArticleCountByKeyWords(String keyWords,int pageSize);
+	/**
+	 * 根据关键字来返回List<Article>集合
+	 */
+	public List<Article> searchArticleByTitle(String keyWords,int offset, int obtain);
+}

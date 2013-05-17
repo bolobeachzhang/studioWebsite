@@ -1,0 +1,96 @@
+package cn.edu.cdu.lab.service.impl;
+
+import java.util.List;
+
+import cn.edu.cdu.lab.dao.impl.BasicDaoImpl;
+import cn.edu.cdu.lab.model.Forum;
+import cn.edu.cdu.lab.service.ForumService;
+
+/**
+ * 
+ * @author xiujiang tan
+ *2012-3-18
+ *对论坛内容的一系列的管理
+ */
+public class ForumServiceImpl extends BasicDaoImpl  implements ForumService {
+	
+	/* (non-Javadoc)
+	 * @see cn.edu.cdu.lab.service.impl.ForumService#showTopicThemeByPage()
+	 */
+	/**
+	 * 加载parentId为0的主题
+	 */
+	@Override
+	public List<Forum> showTopicThemeByPage(int pageNow,int pageSize,int parentId)
+	{
+		if(parentId == 0)
+		{
+			String hql = "from Forum where parentId = 0";
+			return this.pageQuery(hql,pageSize*(pageNow - 1), pageSize, null);
+		}
+		else
+		{
+			String hql = "from Forum where parentId = "+parentId;
+			return this.pageQuery(hql,pageSize*(pageNow - 1), pageSize, null);
+		}
+		
+	}
+	
+	public Integer getPageCount(int pageSize,int parentId)
+	{
+		if(parentId == 0)
+		{
+			int rowSize = this.affectNumber("from Forum where parentId = 0", null);
+			return rowSize%pageSize == 0 ? rowSize/pageSize : rowSize/pageSize + 1; 
+		}
+		else
+		{ 
+			String hql = "from Forum where parentId = "+parentId;
+			int rowSize = this.affectNumber(hql, null);
+			return rowSize%pageSize == 0 ? rowSize/pageSize : rowSize/pageSize + 1; 
+		}
+	}
+	//返回一条记录
+	public Forum getForumByid(int id)
+	{
+		String hql = "from Forum where id ="+id;
+		return (Forum) this.query(hql).get(0);
+	}
+	
+	//不用分页，返回一条主题下的所有记录
+	public List<Forum> getForumByid_many_C(int id)
+	{
+		String hql = "from Forum where parentId ="+id;
+		return this.query(hql);
+	}
+	
+	//删除单个的回帖 
+	//附件操作是记录删除时的当前的pageNow   其实也是可以删除单个的主题
+	public void deleteOne_TC(Forum forum)
+	{
+		this.delete(forum);
+	}
+	//删除某条主题下的所有回帖信息
+	public void deleteOneT_allC(int id)
+	{
+		List<Forum> oneT_many_C = this.getForumByid_many_C(id);
+		//直接删除一个集合对象
+		this.getHibernateTemplate().deleteAll(oneT_many_C);
+	}
+	//保存论坛主题
+	public void saveForum_T(Forum forum)
+	{
+		this.save(forum);
+	}
+	//删除多条
+	
+	
+	//添加主题  一定要想办法返回主键
+	public int addForum(Forum forum)
+	{
+		//带回插入主题的id值
+	   return (Integer) this.saveForum(forum);
+	}
+	
+	
+}

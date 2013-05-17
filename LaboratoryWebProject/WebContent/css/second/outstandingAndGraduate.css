@@ -1,0 +1,26 @@
+body {
+	margin: auto;
+}
+#div1{
+   border: 1px solid #dddddd;
+   width: 700px;
+   min-height: 150px;
+   margin: 0 auto;
+  }
+  #div2{
+   width: 700px;
+   height: auto;
+   margin: 0 auto;
+   margin-top: 10px;
+  }
+ .p{
+    text-align: center;
+    font-size: 25px;
+  }
+  .p1{
+   text-align: center;
+   font-size: 15px;
+  }
+  a{
+  text-decoration: none;
+  }

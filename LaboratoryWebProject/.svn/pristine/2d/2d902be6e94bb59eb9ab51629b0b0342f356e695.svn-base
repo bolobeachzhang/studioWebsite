@@ -1,0 +1,86 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>回帖页面</title>
+<link type="text/css" rel="stylesheet" href="css/base/bootstrap_modify_for_lab.css" />
+<link href="css/second/replyBBS.css" rel="stylesheet" media="screen">
+<script type="text/javascript">
+$(function(){
+	$("#pointDiscuss a").click(function(){
+		document.getElementById("textareacontent").focus();
+	});
+});
+
+</script>
+</head>
+<body>
+<div id="div0">
+	<div id="div"></div>
+	<!-- ===论坛主题==== -->
+	<div id="div1">
+		<p class="p">帖子主题标题题帖子主题标题帖子主题标题
+			<label id="pointDiscuss"><a href="#fatie">评论</a></label>
+		</p>
+		<!-- 回复列表 -->
+		<div class="replyList">
+			<div id="div3">
+			<img alt="" src="../images/BBSPeplePhotos/bg.jpg"/>
+			</div>
+			<div class="div4content">
+					回复主题的内容回复主题的内容回复主题的内容回复主题的内容回复主题的内容回复主题的内容回复主题的内容回
+					复主题的内容回复主题的内容回复主题的内容回复主题的内容
+					回复主题的内容回复主题的内容回复主题的内容回复主题的内容回复主题的内容回复主题的内容回复主题的内容回
+					复主题的内容回复主题的内容回复主题的内容回复主题的内容
+				
+			</div>
+			<p class="p0">
+			    2012/9/15  10:15:30
+			</p>
+	 	</div><!-- end replyList -->
+	 	<!-- 回复列表 -->
+		<div class="replyList">
+			<div id="div3">
+			<img alt="" src="../images/BBSPeplePhotos/bg.jpg"/>
+			</div>
+			<div class="div4content">
+					回复主题的内容
+				
+			</div>
+			<p class="p0">
+			    2012/9/15  10:15:30
+			</p>
+		</div><!-- end replyList -->
+	 	<!-- 回复列表 -->
+		<div class="replyList">
+			<div id="div3">
+			<img alt="" src="../images/BBSPeplePhotos/bg.jpg"/>
+			</div>
+			<div class="div4content">
+					回复主题的内容回复主题的内容回复主题的内容回复主题的内容回复主题的内容回复主题的内容回复主题的内容回
+					复主题的内容回复主题的内容回复主题的内容回复主题的内容
+					回复主题的内容回复主题的内容回复主题的内容回复主题的内容回复主题的内容回复主题的内容回复主题的内容回
+					复主题的内容回复主题的内容回复主题的内容回复主题的内容
+				
+			</div>
+			<p class="p0">
+			    2012/9/15  10:15:30
+			</p>
+	 	</div><!-- end replyList -->
+	 	
+	</div>
+	<!-- ===回复==== -->
+	<div id="div2">
+		<a name="fatie"></a>
+		<p class="p">&nbsp;&nbsp;回复</p>
+		<p class="p1">
+			
+			<textarea id="textareacontent"></textarea>
+		</p>
+		<input type="button" class="btn" value="提交" style="float: right;margin-right: 50px;">
+	</div>
+	</div>
+</body>
+</html>

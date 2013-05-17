@@ -1,0 +1,178 @@
+/**
+ * @Title ManagePersonAction.java
+ * @Package cn.edu.cdu.lab.action
+ * @Description [简要描述本文件的作用] 本文件是管理员对人员管理的业务类的抽象类文件
+ * @author 李华 【643444070@qq.com】
+ * @Date 2013-3-14 9:26:10
+ * @Version 1.0
+ * 
+ */
+package cn.edu.cdu.lab.service;
+
+import java.util.List;
+
+import cn.edu.cdu.lab.model.Register;
+import cn.edu.cdu.lab.model.Student;
+import cn.edu.cdu.lab.model.Teacher;
+import cn.edu.cdu.lab.vo.Post;
+import cn.edu.cdu.lab.vo.Research;
+import cn.edu.cdu.lab.vo.Title;
+
+/**
+ * @ClassName: ManagePersonAction 
+ * @Description: 本文件是管理员对人员管理的业务类的抽象类文件
+ * @author 李华 【643444070@qq.com】
+ * @date 2013-3-14 9:26:30
+ *
+ */
+public interface PersonService {
+	
+	/**
+	 * 管理员添加人员的时候检查人员id是否可用
+	 * @param id 添加的id
+	 * @param type 添加者的类型
+	 * @return 是否添加成功
+	 */
+	public boolean checkID(String id, Integer type);
+	
+	/**
+	 * 保存一个管理员
+	 * @param userid 管理员id
+	 * @param username 管理员名字
+	 * @param userpass 管理员密码
+	 */
+	public void saveManager(String userid,String username, String userpass);
+	
+	/**
+	 * 保存一个教师信息
+	 * @param teacher
+	 */
+	public void saveTeacher(Teacher teacher);
+	
+	/**
+	 * 得到一个教师信息
+	 * @param teacherId 教师id
+	 * @return
+	 */
+	public Teacher getTeacher(String teacherId);
+	
+	/**
+	 * 更新一个教师信息
+	 * @param teacher
+	 */
+	public void updateTeacher(Teacher teacher);
+	
+	/**
+	 * 保存一个学生信息
+	 * @param teacher
+	 */
+	public void saveStudent(Student student);
+	
+	/**
+	 * 得到一个学生信息
+	 * @param studentId 学生id
+	 */
+	public Student getStudent(String studentId);
+	
+	/**
+	 * 更新一个学生信息
+	 * @param student
+	 */
+	public void updateStudent(Student student);
+	/**
+	 * 保存一个注册人员信息
+	 * @param teacher
+	 */
+	public void saveReister(Register register);
+	
+	/**
+	 *更新一个注册人员信息 
+	 * @param register
+	 */
+	public void updateRegister(Register register);
+	
+	/**
+	 * 得到一个注册人员的信息
+	 * @param registerId
+	 * @return
+	 */
+	public Register getRegister(String registerId);
+	
+	/**
+	 * 分页查找
+	 * @param entity 待分页的实体
+	 * @param offset 跳过记录数
+	 * @param obtain 查询记录数
+	 * @param params 查询参数
+	 * @return
+	 */
+	public List getList(Object entity, int offset, int obtain, Object[] params);
+	
+	/**
+	 * 查询页数
+	 * @param obtain 每页显示几条数据
+	 * @return
+	 */
+	public Integer getPageCount(Object entity, int obtain);
+	
+	/**
+	 * 删除单条记录
+	 * @param id
+	 * @param type
+	 */
+	public void deleteOne(String id, int type);
+	
+	/**
+	 * 修改一个人的密码
+	 * @param userType
+	 * @param userID
+	 * @param pass
+	 */
+	public void updatePass(int userType, String userID, String pass);
+	
+	/**
+	 * 检查密码是否正确
+	 * @param userType
+	 * @param userID
+	 * @param pass
+	 * @return
+	 */
+	public boolean checkPass(int userType, String userID, String pass);
+	
+	/**
+	 * 获取一个研究方向
+	 * @param type 研究方向的类型
+	 * @return
+	 */
+	public Research getResearch(int type);
+	
+	/**
+	 * 获取一个职称内容
+	 * @return
+	 */
+	public Title getTitle();
+	
+	/**
+	 * 获取一个岗位内容
+	 * @return
+	 */
+	public Post getPost();
+	
+	/**
+	 * 获取全部杰出学生
+	 * @return
+	 */
+	public List<Student> getOutstandingStudent();
+	
+	/**
+	 * 获取全部研究生
+	 * @return
+	 */
+	public List<Student> getGraduate();
+	
+	/**
+	 * 检查登录,登录成功返回登陆者，主要是获取用户名的信息
+	 * @return
+	 */
+	public List login(int userType, String userid, String password);
+}

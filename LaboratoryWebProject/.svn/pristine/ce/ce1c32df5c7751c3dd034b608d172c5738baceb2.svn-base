@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <package name="index" extends="struts-default">
+    	<!-- 登录和退出 -->
+    	<action name="frontIndexAction_*" class="cn.edu.cdu.lab.action.FrontIndexAction" method="{1}"> 
+    	    <result name="MSuccess">/WEB-INF/manage/mainM.jsp</result>
+    	    <result name="TSuccess">/WEB-INF/manage/mainT.jsp</result>
+    	    <result name="SSuccess">/WEB-INF/manage/mainS.jsp</result>
+    	    <result name="RSuccess">/WEB-INF/manage/mainR.jsp</result>
+    	    <result name="logoutSuccess">/WEB-INF/index/index.jsp</result>
+    	    <result name="indexSuccess">/WEB-INF/index/index.jsp</result>
+    	    
+    	    <result name="getMessageSuccess">/WEB-INF/index/messageMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/index/message.jsp</result>
+    	    <result name="partTwo">/WEB-INF/index/connection.jsp</result>
+    	</action> 
+    	
+    	<action name="frontIntroduceAction_*" class="cn.edu.cdu.lab.action.FrontIntroduceAction" method="{1}"> 
+    	    <result name="getIntroSuccess">/WEB-INF/introduce/LabIntroduceMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/introduce/LaboratoryGaiK.jsp</result>
+    	    <result name="partTwo">/WEB-INF/introduce/Organization.jsp</result>
+    	    <result name="partThree">/WEB-INF/introduce/XueShuTop.jsp</result>
+    	    <result name="partFour">/WEB-INF/introduce/LaboratoryMaster.jsp</result>
+    	</action> 
+    	
+    	<action name="frontDynamicAction_*" class="cn.edu.cdu.lab.action.FrontDynamicAction" method="{1}"> 
+    	    <result name="getDynamicSuccess">/WEB-INF/dynamic/dynamicMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/dynamic/industryDynamics.jsp</result>
+    	    <result name="partTwo">/WEB-INF/dynamic/laboratoryNews.jsp</result>
+    	    <result name="partThree">/WEB-INF/dynamic/innovationCulture.jsp</result>
+    	    <result name="partFour">/WEB-INF/dynamic/noticeNnnouncement.jsp</result>
+    	</action>
+    	
+    	<action name="frontAchieveAction_*" class="cn.edu.cdu.lab.action.FrontAchieveAction" method="{1}"> 
+    	    <result name="getAchieveSuccess">/WEB-INF/achieve/achieveMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/achieve/achievePaper.jsp</result>
+    	    <result name="partTwo">/WEB-INF/achieve/prize.jsp</result>
+    	    <result name="partThree">/WEB-INF/achieve/others.jsp</result>
+    	</action>
+    	
+    	<action name="frontTrainAction_*" class="cn.edu.cdu.lab.action.FrontTrainAction" method="{1}"> 
+    	    <result name="getTrainSuccess">/WEB-INF/train/trainMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/train/studentIntroduce.jsp</result>
+    	    <result name="partTwo">/WEB-INF/train/outstandingStudent.jsp</result>
+    	    <result name="partThree">/WEB-INF/train/graduate.jsp</result>
+    	</action>
+    	
+    	<action name="frontDownloadAction_*" class="cn.edu.cdu.lab.action.FrontDownloadAction" method="{1}"> 
+    	    <result name="getDownloadSuccess">/WEB-INF/download/downloadMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/download/coursewareDownload.jsp</result>
+    	    <result name="partTwo">/WEB-INF/download/toolsDownload.jsp</result>
+    	    <result name="partThree">/WEB-INF/download/formOrTableDownload.jsp</result>
+    	</action>
+    	
+    	<action name="frontTeamAction_*" class="cn.edu.cdu.lab.action.FrontTeamAction" method="{1}"> 
+    	    <result name="getTeamSuccess">/WEB-INF/team/teamMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/team/Research.jsp</result>
+    	    <result name="partTwo">/WEB-INF/team/professional.jsp</result>
+    	    <result name="partThree">/WEB-INF/team/post.jsp</result>
+    	    
+    	    <result name="separtOne">/WEB-INF/team/Research.jsp</result>
+    	    <result name="separtTwo">/WEB-INF/team/Researchtwo.jsp</result>
+    	    <result name="separtThree">/WEB-INF/team/Researchtwo.jsp</result>
+    	</action>
+    	
+    	<action name="frontExchangeAction_*" class="cn.edu.cdu.lab.action.FrontExchangeAction" method="{1}"> 
+    	    <result name="getExchangeSuccess">/WEB-INF/exchange/exchangeMain.jsp</result>
+    	    <result name="partOne">/WEB-INF/exchange/openSubject.jsp</result>
+    	    <result name="partTwo">/WEB-INF/exchange/cooperationProjects.jsp</result>
+    	    <result name="partThree">/WEB-INF/exchange/academicExchangeConference.jsp</result>
+    	    <result name="partFour">/WEB-INF/exchange/academicBBSindex.jsp</result>
+    	    
+    	    <result name="separtOne">/WEB-INF/exchange/academicExchangeConference.jsp</result>
+    	    <result name="separtTwo">/WEB-INF/exchange/academicExchangeLecture.jsp</result>
+    	</action>
+    </package>
+
+</struts>
+

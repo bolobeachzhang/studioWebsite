@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>首页访问</title>
+</head>
+<body>
+<%
+	//request.getRequestDispatcher("userCheckAction_login").forward(request, response);
+	response.sendRedirect("frontIndexAction_index"); //这里不懂 浪费时间了
+%>
+<!-- 
+<form action="userCheckAction_login" method="get">
+	<input type="submit" value="点击">
+</form>
+ -->
+</body>
+</html>

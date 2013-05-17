@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="cn.edu.cdu.lab.model">
+	<class name="ReplyMessage" table="replyMessage">
+		<id name="replyId">
+			<column name="replyId"></column>
+			<generator class="assigned" />
+		</id>
+		<property name="content">
+			<column name="content"  not-null="false" ></column>
+		</property>
+		<property name="repTime">
+			<column name="repTime" not-null="true"></column>
+		</property>
+		<property name="teacherId">
+			<column name="teacherId" length="30" not-null="false"></column>
+		</property>
+		<property name="roleType">
+			<column name="roleType" not-null="false"></column>
+		</property>
+		<property name="messageId">
+			<column name="messageId" not-null="true"></column>
+		</property>
+	</class>
+</hibernate-mapping>

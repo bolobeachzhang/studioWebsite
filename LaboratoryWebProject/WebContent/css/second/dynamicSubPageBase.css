@@ -1,0 +1,42 @@
+body {
+	margin: auto;
+}
+
+#div {
+	margin: 0 auto;
+	width: 700px;
+	height: 20px;
+	background-image: url("../../images/line.png");
+	background-repeat: no-repeat;
+}
+
+#div2 {
+	margin: 0 auto;
+	width: 700px;
+	height: auto;
+}
+
+label {
+	float: right;
+	margin-top: 10px;
+}
+a {
+	text-decoration: none;
+	color: black;
+	font-family: "微软雅黑";
+}
+#div2 > .toPage{
+	text-align: center;
+}
+p {
+	width: 700px;
+	line-height: 40px;
+	height: 40px;
+	border-bottom: 1px dotted red;
+	text-decoration: none;
+	font-family: "微软雅黑";
+}
+input {
+	width: 20px;
+	height: 12;
+}

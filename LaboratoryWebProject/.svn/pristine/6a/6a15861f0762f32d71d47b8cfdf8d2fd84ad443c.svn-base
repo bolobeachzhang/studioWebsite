@@ -1,0 +1,139 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src=""></script>
+<link href="css/base/bootstrap_modify_for_lab.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/jquery/jquery-1.8.2.min.js"></script>
+<!-- <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script> -->
+
+<style type="text/css">
+	.mTable{
+		width: 700px;
+		margin-left: 25px;
+		margin-top: 20px;
+	}
+	.mTable td{
+		padding: 0px;
+		text-align: center;
+	}
+	.more:hover{
+		color: red;
+		cursor: pointer;
+	}
+	.mBtn{
+		margin-right: 20px;
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+		$("input[type=submit]").click(function(){
+			
+			var title = $("input[name=title]").val();	//取得文件描述的所有节点
+			var fileName = $("input[type=file]").val();	//获得文件的全路径
+			
+			var uploaderId = '';	//上传者的Id号
+			var uploaderName = 'system';
+			var uploaderRole = '';	
+			var uploaderRoleNodes = $("input[name=role]");	//获得文件上传权限的节点//上传者的角色
+			uploaderRoleNodes.each(function(i,item){	//循环查看选择了那个上传权限
+				var isChecked = $(item).attr("checked");
+				if('checked' == isChecked){
+					uploaderRole = $(item).val();
+				}
+			});
+			var downloaderRole = '';	//下载者类型
+			var time = $("input[name=uploadDate]").val();	//Date 上传时间
+			var checks = '';	//Integer  是否审核
+			var size = '';	//文件类型的所有节点	//String 文件大小
+			var type = $(".fileType").val();	//Integer 类型，课件，工具软件，文档
+			var fileUrl = '';	//String 在服务器上的存放路径
+			var downloads = '';	//Integer 下载次数
+			
+			
+			if('' == uploaderRole){	//如果为空则提示用户他还没有选择上传权限
+				alert("您还没有选择上传的角色!");
+			}
+			 
+			var params = "title="+title+"&fileName="+fileName+"&uploaderRole="+uploaderRole+"&time="+time+"&type="+type+"&uploaderName="+uploaderName+"&uploaderId=&downloaderRole=&checks=&size=&fileUrl=&downloads=";
+			//设置action的值
+			$("#upform").attr("action","manageFileAction_upload?"+params);
+			alert($("#upform").attr("action"));
+			alert("文件描述:"+title+"|文件类型:"+type+"上传时间:"+time+"|上传权限:"+uploaderRole+"文件名字:"+fileName);
+		});
+	});
+</script>
+</head>
+<body>
+	<form id="upform" action="" method="post" enctype="multipart/form-data">
+		<table class="table table-striped table-bordered mTable">
+			<tr><td colspan=2>文件上传</td></tr>
+			<tr>
+				<td>简单描述：</td>
+				<td><input type='text' name='title'></td>
+			</tr>
+			<tr>
+				<td>文件类型：</td>
+				<td>
+					<select class='fileType'>
+						<option value=1>学习课件</option>	
+						<option value=2>工具软件</option>
+						<option value=3>相关文档</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>文件时间：</td>
+				<td><input type="text" name="uploadDate"></td>
+			</tr>
+			<tr>
+				<td>上传权限：</td>
+				<td>
+					<input type='radio' name='role' value=4>教师
+					<input type='radio' name='role' value=2>学生
+					<input type='radio' name='role' checked value=1>注册人员
+					<input type='radio' name='role' value=0>游客
+				</td>
+			</tr>
+			<tr>
+					<td>选择文件：</td>
+					<td><input type='file' name="upload" value='浏览...'></td>
+				</tr>
+				<tr id="last">
+					<td class="more"></td>
+					<td>
+						<input type="reset" value="重置"/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="submit" value="确定">
+					</td>
+				</tr>
+		</table>
+	</form>	
+	<form action="" method="get" enctype="multipart/form-data">
+	<table class="table table-striped table-bordered mTable">
+		<tr><td>文件标题：</td><td><input type="text"></td></tr>
+		<tr><td>文件标题：</td>
+			<td><select>
+				<option>学习课件</option>	
+				<option>工具软件</option>
+				<option>相关文档</option>
+			</select></td>
+		</tr>
+		<tr><td>下载权限：</td>
+			<td>
+			<input type="radio" value="4">教师
+			<input type="radio" value="2">学生
+			<input type="radio" value="1">注册人员
+			<input type="radio" value="0">游客
+			</td>
+		</tr>
+		<tr><td>文件标题：</td><td><input type="file" value="浏览..."></td></tr>
+		<tr><td colspan="2" style="text-align: center;"><input type="submit" class="btn mBtn" value="确认上传"><input type="reset" value="取消上传" class="btn"></td></tr>
+	</table>
+	</form>
+</body>
+</html>

@@ -1,0 +1,26 @@
+/*这是一个组织机构的样式表*/
+body{
+	width: 100%;
+	margin: 0px;
+	font-family: 宋体;
+	font-size:12px;
+	padding: 0px;
+	height: 460px;
+}
+.OrganizationFrame{
+	width: 550px;
+	margin: 0 auto;
+	text-align: center;
+	height: 450px;
+	overflow: hidden;
+	margin-top: 30px;
+}
+.OrganizationJieGou{
+	width: 355px;
+	background-color: pink;
+	margin: 0 auto;
+	height:445px;
+}
+a {outline: none;}
+a:active {star:expression(this.onFocus=this.blur());}
+:focus { outline:0; }

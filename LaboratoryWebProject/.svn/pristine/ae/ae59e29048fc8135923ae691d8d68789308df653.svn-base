@@ -1,0 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet"
+	type="text/css">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<style type="text/css">
+	body{
+		font-family: "微软雅黑";
+	}
+	#line{
+		margin-top: 36px;
+	}
+	#titleDiv{
+		margin-left: 53px;
+		width: 650px;
+		height:20px;
+		border: 1px solid black;
+	}
+	#titleDiv #titleSpan{
+		float: left;
+		background-color: #8fab8;
+	}
+	#titleDiv #downloadSpan{
+		float: right;
+		background-color: #8fab8;
+	}
+</style>
+</head>
+<body>
+	<img id="line" src="images/line.png">
+	<div id="titleDiv"><span id="titleSpan">标题</span><span id="downloadSpan">点击下载</span></div>
+	<div>论文摘要：
+		<div>这里是摘要内容</div>
+	</div>
+	<table>
+		<tr>
+			<td>论文类型</td><td></td>
+			<td>期刊号</td><td></td>
+			<td>发表时间</td><td></td>
+			<td>论文作者</td><td></td>
+			<td>论文大小</td><td></td>
+			<td>论文格式</td><td></td>
+			<td>下载次数</td><td></td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+ <!-- 引入全局配置文件 
+ <import resource="applicationContext.xml"/>
+-->
+<!-- 创建业务逻辑层Service对象   依赖注入其持久层对象属性-->
+<bean id="connectionService" class="cn.edu.cdu.lab.service.impl.ConnectionServiceImpl">
+  <property name="sessionFactory" ref="sessionFactory" />
+</bean>
+
+<!-- 实现对文章service的构造方法注入 -->
+<bean id="articleManageService" class="cn.edu.cdu.lab.service.impl.ArticlServiceImpl">
+	<property name="sessionFactory" ref="sessionFactory" />
+</bean>
+
+<bean id="personService" class="cn.edu.cdu.lab.service.impl.PersonServiceImpl" scope="prototype">
+	<property name="sessionFactory" ref="sessionFactory" />
+</bean>
+
+<bean id="messageService" class="cn.edu.cdu.lab.service.impl.MessageServiceImpl" scope="prototype">
+	<property name="sessionFactory" ref="sessionFactory" />
+</bean>
+<!--chenliang:2013-03-14 将菜单的service是现现类交个spring来管理，并且注入sessionFactory -->
+<bean id="menuManageService" class="cn.edu.cdu.lab.service.impl.MenuManageServiceImpl">
+	<property name="sessionFactory" ref="sessionFactory" />
+</bean>
+<bean id="fileManageService" class="cn.edu.cdu.lab.service.impl.FileManageServiceImpl">
+	<property name="sessionFactory" ref="sessionFactory" />
+</bean>
+<!-- 对论坛service的注入 -->
+<bean id="forumService" class="cn.edu.cdu.lab.service.impl.ForumServiceImpl" scope="prototype"> 
+	<property name="sessionFactory" ref="sessionFactory" />
+</bean>
+<bean id="thesisService" class="cn.edu.cdu.lab.service.impl.ThesisServiceImpl" scope="prototype">
+	<property name="sessionFactory" ref="sessionFactory" />
+</bean>
+</beans>

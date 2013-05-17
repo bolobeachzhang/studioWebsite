@@ -1,0 +1,308 @@
+/**
+ * @Title ManageFileAction.java
+ * @Package cn.edu.cdu.lab.action
+ * @Description [简要描述本文件的作用] 本文件是后台管理员操作文件
+ * @author chenlaing
+ * @Date 2013-03-19
+ * @Version 1.0
+ * 
+ */
+package cn.edu.cdu.lab.action;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.views.freemarker.tags.FileModel;
+
+import cn.edu.cdu.lab.model.Files;
+import cn.edu.cdu.lab.service.FileManageService;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+
+/**
+ * @ClassName: ManageFileAction 
+ * @Description: 管理员对文件的管理
+ * @author:chenliang
+ * @date：2013-03-19
+ */
+public class ManageFileAction extends ActionSupport implements ModelDriven{
+
+	private static final long serialVersionUID = 1L;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+
+	private FileManageService fileManageService;	//注入service
+	
+	private List<Files> fileList = new ArrayList<Files>();
+	
+	Files fileModel = new Files();	//文件类的值对象，用来接收页面传来的值
+	public FileManageService getFileManageService() {
+		return fileManageService;
+	}
+
+	public void setFileManageService(FileManageService fileManageService) {
+		this.fileManageService = fileManageService;
+	}
+
+	private File upload;
+    private String uploadContentType;
+    private String uploadFileName;
+	
+    private String fileName;	//提供下载的文件名字
+    private String inputPath;	//体统下载的文件路劲
+    private String downloadFileName;
+    
+    
+	public String getDownloadFileName() {
+		return downloadFileName;
+	}
+
+	public void setDownloadFileName(String downloadFileName) {
+		this.downloadFileName = downloadFileName;
+	}
+
+	public File getUpload() {
+		return upload;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getInputPath() {
+		return inputPath;
+	}
+
+	public void setInputPath(String inputPath) {
+		this.inputPath = inputPath;
+	}
+
+	public void setUpload(File upload) {
+		this.upload = upload;
+	}
+
+	public String getUploadContentType() {
+		return uploadContentType;
+	}
+
+	public void setUploadContentType(String uploadContentType) {
+		this.uploadContentType = uploadContentType;
+	}
+
+	public String getUploadFileName() {
+		return uploadFileName;
+	}
+
+	public void setUploadFileName(String uploadFileName) {
+		this.uploadFileName = uploadFileName;
+	}
+	public List<Files> getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(List<Files> fileList) {
+		this.fileList = fileList;
+	}
+
+	/**
+	 * 跳转到管理员管理文件页面
+	 * @return
+	 */
+	public String getM(){
+		
+		return "getMSuccess";
+	}
+	
+	/**
+	 * 跳转到管理员管理文件页面
+	 * @return
+	 */
+	public String getSTR(){
+		
+		return "getSTRSuccess";
+	}
+	
+	/**
+	 * 所有角色的文件上传，
+	 * @return
+	 */
+	public String uploadPage(){	//此方法用来在后台点击后跳转到上传页面
+		return "uploadSuccess";
+	}
+	
+	public String upload(){	//定义文件上传处理过程的方法
+		InputStream is = null;
+		OutputStream os = null;
+
+		try{
+			String path=ServletActionContext.getServletContext().getRealPath("/Files/uploadFiles");	//指定文件存放到服务器上的路径
+			File uploadDir = new File(path);
+			if(!uploadDir.exists()){	//判断文件是否存在，如果不存在就创建一个保存文件的文件夹
+				uploadDir.mkdirs();
+	        }
+			
+			File savePath = new File(uploadDir, uploadFileName);	//创建一个指定路径和名字的文件,即写的文件
+			is = new BufferedInputStream(new FileInputStream(upload)); 	//获得上传文件读取流
+			os = new BufferedOutputStream(new FileOutputStream(savePath));	//获得文件输出流
+			
+			
+			String fileSize = fileManageService.getFileSize(upload.length());
+			
+			String filePath = path+"\\"+uploadFileName;	//文件的保存路径
+			fileModel.setSize(fileSize);
+	        fileModel.setFileUrl(filePath);//设置文件的保存路径
+	        fileModel.setDownloads(0);	//默认设置下载次数为0
+	        fileModel.setChecks(0);	//如果是0就是待审核的,1是审核了的
+	        try {
+				if((fileModel.getFileUrl() != null) || (fileModel.getFileUrl() != "")){	//如果文件不为空代表选择了上传的文件
+
+						fileManageService.saveFile(fileModel);
+						byte[] buffer = new byte[1024];  //构建一个缓冲区
+						int length = 0;
+						while ((length = is.read(buffer)) > 0) {	//文件循环读取并写入到指定地方
+				            os.write(buffer, 0, length);  
+				        }
+				}
+				System.out.println("文件保存成功");
+				String newName = new String(fileModel.getFileName().getBytes(), "ISO8859-1");
+				String newName2 = new String(fileModel.getFileName().getBytes(), "UTF-8");
+				System.out.println("wenjiaISO8859"+fileModel.getFileUrl()+"\\"+newName2);
+				System.out.println("wenjiaUTF"+fileModel.getFileUrl()+"\\"+newName);
+				System.out.println("wenjia"+fileModel.getFileUrl()+"\\"+fileModel.getFileName().getBytes());
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+
+		}catch(IOException e){
+			e.printStackTrace();
+		}finally{
+			try {
+				if(is != null){	//如果输入流不为空,最后关闭输入流
+					is.close();	
+					}
+				if(os != null){	//如果输出流不为空，最后关闭输出流
+					os.close();
+				}
+			}catch(IOException e){
+				e.printStackTrace();
+			}
+		}
+		return "uploadSuccess";
+	}
+
+	public String getFiles(){
+		String hql = null;
+		System.out.println("role:"+fileModel.getUploaderRole());
+		if(fileModel.getUploaderRole() == 10){
+			 hql = "from Files";
+		}else{
+			hql = "from Files where uploaderRole="+fileModel.getUploaderRole();
+		}
+		try {
+			fileList = fileManageService.listFiles(hql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "listFiles";
+	}
+	
+	public String delete(){
+		
+		String hql = "from Files where id="+fileModel.getId();
+		try {
+			@SuppressWarnings("unchecked")
+			Files deleteFile = fileManageService.listFiles(hql).get(0);
+			if(deleteFile !=null){
+				String diskFilePath = fileModel.getFileUrl()+"\\"+fileModel.getFileName();
+				System.out.println(diskFilePath);
+				File diskFile = new File(diskFilePath);
+
+					fileManageService.deleteFile(deleteFile);	//删除数据库中的文件记录
+					diskFile.delete();	//删除磁盘上的文件
+			}
+				fileList = fileManageService.listFiles("from Files where uploaderRole="+fileModel.getUploaderRole());	//列出和它同权限的管理员上传的文件
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "listFiles";
+	}
+	
+	public InputStream getInputStream() throws Exception { 
+		return ServletActionContext.getServletContext().getResourceAsStream("/Files/uploadFiles/"+fileModel.getFileName()); 
+	} 
+	
+	public String download(){	//下载文件,并更新下载次数
+		int fileId = fileModel.getId();
+		String hql = "from Files where id="+fileId;
+		System.out.println(hql);
+		try {
+			Files  file = fileManageService.listFiles(hql).get(0);
+			
+			int newDownloads = file.getDownloads()+1;
+			
+			file.setDownloads(newDownloads);	//重新设置现在次数,加一次
+			System.out.println("wenjian:"+file.getDownloads());
+			fileManageService.updateFile(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.setDownloadFileName(fileModel.getFileName());	//设置文件的下载名字
+		System.out.println("fileName:"+downloadFileName);
+		return "download";
+	}
+
+	
+	public String check(){
+		int checkId = fileModel.getId();	//获得文件id号
+		try {
+			fileManageService.check(checkId);	//根据文件id号来审核
+			fileList = fileManageService.listFiles("from Files where uploaderRole="+fileModel.getUploaderRole());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	//列出和它同权限的管理员上传的文件
+		return "listFiles";
+	}
+	
+	public void init(){
+		ActionContext act =  ActionContext.getContext();
+		request = (HttpServletRequest) act.get(ServletActionContext.HTTP_REQUEST);
+		response = (HttpServletResponse) act.get(ServletActionContext.HTTP_RESPONSE);
+		response.setContentType("text/html");//设置返回相应格式，很重要 
+		response.setCharacterEncoding("utf-8");
+	}
+	
+	/**
+	 * 判断输入字符串是否为空，为空就返回""
+	 * @param string
+	 * @return string
+	 */
+	public String isStringOrNull(String string){
+		return string == null ? "": string;
+	}
+
+	@Override
+	public Object getModel() {
+		// TODO Auto-generated method stub
+		return fileModel;
+	}
+}

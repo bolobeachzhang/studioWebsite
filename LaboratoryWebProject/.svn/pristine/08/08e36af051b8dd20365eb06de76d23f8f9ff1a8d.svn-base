@@ -1,0 +1,114 @@
+package cn.edu.cdu.lab.action;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
+import cn.edu.cdu.lab.model.Teacher;
+import cn.edu.cdu.lab.service.PersonService;
+import cn.edu.cdu.lab.vo.Post;
+import cn.edu.cdu.lab.vo.Research;
+import cn.edu.cdu.lab.vo.Title;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class FrontTeamAction extends ActionSupport{
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	
+	private PersonService personService;
+	private Research research;
+	private Title title;
+	private Post post;
+	
+	public void setPersonService(PersonService personService) {
+		this.personService = personService;
+	}
+
+	public String getTeam(){
+		init();
+		String section = request.getParameter("section");
+		
+		request.setAttribute("section", section);
+		return "getTeamSuccess";
+	}
+	
+	public String part(){
+		init();
+		int section = Integer.parseInt(request.getParameter("section"));
+		if(section == 1){
+			return "partOne";
+		}
+		if(section == 2){
+			if(title == null){
+				title = personService.getTitle();
+			}
+			request.setAttribute("title", title);
+			return "partTwo";
+		}
+		if(section == 3){
+			if(post == null){
+				post = personService.getPost();
+			}
+			request.setAttribute("post", post);
+			return "partThree";
+		}
+		return NONE;
+	}
+	
+	public String separt(){
+		init();
+		int section = Integer.parseInt(request.getParameter("section"));
+		if(section == 1){ //图形处理与模式识别研究方向
+			research = personService.getResearch(1);
+			request.setAttribute("research", research);
+			return "separtOne";
+		}
+		if(section == 2){
+			research = personService.getResearch(2);
+			request.setAttribute("research", research);
+			return "separtTwo";
+		}
+		if(section == 3){
+			research = personService.getResearch(3);
+			request.setAttribute("research", research);
+			return "separtThree";
+		}
+		return NONE;
+	}
+	
+	/**
+	 * 跳转到详细介绍老师背景页面
+	 * @return
+	 */
+	public String getTeacherDetail(){
+		init();
+		String teacherId = request.getParameter("teacherId");
+		request.setAttribute("teacherId", teacherId); //这里把teacherId传递给具体页面
+		return "getTeacherDetail";
+	}
+	
+	/**
+	 * 加载详细介绍老师页面
+	 * @return
+	 */
+	public String getTeacherInclude(){
+		init();
+		String teacherId = request.getParameter("teacherId");
+		Teacher teacher = personService.getTeacher(teacherId);
+		request.setAttribute("teacher", teacher);
+		return "getTeacherInclude";
+	}
+	
+	public void init(){
+		ActionContext act =  ActionContext.getContext();
+		request = (HttpServletRequest) act.get(ServletActionContext.HTTP_REQUEST);
+		response = (HttpServletResponse) act.get(ServletActionContext.HTTP_RESPONSE);
+		response.setContentType("text/html");//设置返回相应格式，很重要 
+		response.setCharacterEncoding("utf-8");
+	}
+}

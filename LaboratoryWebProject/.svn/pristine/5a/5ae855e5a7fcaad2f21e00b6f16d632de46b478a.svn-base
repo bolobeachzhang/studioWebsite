@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+ <!-- 引入全局配置文件
+ <import resource="applicationContext.xml"/>
+ -->
+<!-- 创建控制层"UserCheckAction"的对象 依赖注入其业务层对象属性 -->
+<bean id="manageConnectionAction" class="cn.edu.cdu.lab.action.ManageConnectionAction" scope="prototype">
+  	<property name="connectionService" ref="connectionService" />
+</bean>
+
+<bean id="managePersonAction" class="cn.edu.cdu.lab.action.ManagePersonAction" scope="prototype">
+    <property name="personService" ref="personService"/>
+</bean>
+
+<bean id="manageMessageAction" class="cn.edu.cdu.lab.action.ManageMessageAction" scope="prototype">
+    <property name="messageService" ref="messageService"/>
+</bean>
+
+<bean id="manageForumAction" class="cn.edu.cdu.lab.action.ManageForumAction" scope="prototype">
+	<property name="forumService" ref="forumService"></property>
+</bean>
+
+<bean id="managePasswordAction" class="cn.edu.cdu.lab.action.ManagePasswordAction" scope="prototype">
+    <property name="personService" ref="personService"/>
+</bean>
+
+<!-- 文章配置 -->
+<bean id="manageArticleAction" class="cn.edu.cdu.lab.action.ManageArticleAction" scope="prototype">
+	<constructor-arg index="0" ref="articleManageService" />
+</bean>
+
+<!--chenlaing:2013-03014 将菜单的实现类注入到菜单的action中  -->
+<bean id="manageMenuAction" class="cn.edu.cdu.lab.action.ManageMenuAction" scope="prototype">
+	<property name="menuManageService" ref="menuManageService"/>
+</bean>
+
+<bean id="manageFileAction" class="cn.edu.cdu.lab.action.ManageFileAction" scope="prototype">
+	<property name="fileManageService" ref="fileManageService"/>
+</bean>
+
+<bean id="manageThesisAction" class="cn.edu.cdu.lab.action.ManageThesisAction" scope="prototype">
+	<property name="thesisService" ref="thesisService"/>
+</bean>
+
+<bean id="frontIndexAction" class="cn.edu.cdu.lab.action.FrontIndexAction" scope="prototype">
+    <property name="messageService" ref="messageService"/>
+    <property name="connectionService" ref="connectionService"/>
+    <property name="personService" ref="personService"/>
+    <property name="articleManageService" ref="articleManageService" />
+</bean>
+<!-- 合作交流service配置            前台页面的配置                         -->
+<bean id="FrontExchangeAction" class="cn.edu.cdu.lab.action.FrontExchangeAction"> 
+	<property name="articleManageService" ref="articleManageService"/>
+	<property name="forumService" ref="forumService"></property>
+</bean>
+<!-- 实验室介绍前台页面的注入配置 -->
+<bean id="FrontIntroduceAction" class="cn.edu.cdu.lab.action.FrontIntroduceAction">
+	<property name="articleManageService" ref="articleManageService"></property>
+</bean>
+<!-- 最新动态前台页面的文章service实现类的注入 -->
+<bean id="FrontDynamicAction" class="cn.edu.cdu.lab.action.FrontDynamicAction">
+	<property name="articleManageService" ref="articleManageService" />
+</bean>
+<!-- 人才培养前台的文章service实现类的注入 -->
+<bean id="FrontTrainAction" class="cn.edu.cdu.lab.action.FrontTrainAction">
+	<property name="articleManageService" ref="articleManageService" />
+</bean>
+
+
+<bean id="frontTeamAction" class="cn.edu.cdu.lab.action.FrontTeamAction" scope="prototype">
+    <property name="personService" ref="personService"/>
+</bean>
+
+<bean id="frontTrainAction" class="cn.edu.cdu.lab.action.FrontTrainAction" scope="prototype">
+    <property name="personService" ref="personService"/>
+</bean>
+
+<bean id="frontAchieveAction" class="cn.edu.cdu.lab.action.FrontAchieveAction" scope="prototype">
+    <property name="thesisService" ref="thesisService"/>
+</bean>
+
+<bean id="frontDownloadAction" class="cn.edu.cdu.lab.action.FrontDownloadAction" scope="prototype">
+    <property name="fileManageService" ref="fileManageService"/>
+</bean>
+
+</beans>

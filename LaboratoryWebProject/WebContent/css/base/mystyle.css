@@ -1,0 +1,182 @@
+@CHARSET "UTF-8";
+
+html {
+	height: 700px;
+	width: 100%;
+	overflow: scroll;
+	background-image: url("../../images/background2.png");
+	overflow-x: hidden;
+}
+
+body {
+	margin: 0 auto;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	font-family: "微软雅黑";
+	color: white;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+a:ACTIVE {
+	text-decoration: underline;
+}
+
+a:HOVER {
+	text-decoration: underline;
+	color: #005580;
+}
+
+table {
+	border-spacing: 0;
+}
+
+/* 以下为导航样式 */
+#div1 {
+	width: 100%;
+	height: 90%;
+	display: block;
+	background-image: url("../../images/original.png");
+	background-repeat: no-repeat;
+	margin: 0 auto;
+}
+
+.div2 {
+	width: 45%;
+	height: 46%;
+	margin-top: 27%;
+	margin-left: 10%;
+	display: block;
+	float: left;
+}
+
+.replace {
+	margin-left: 4px;
+	width: 138px;
+	height: 138px;
+	float: left;
+	display: block;
+}
+
+.replace1 {
+	margin-left: 4px;
+	/* 	background-color: blue; */
+	width: 280px;
+	height: 138px;
+	float: left;
+	display: block;
+}
+
+.replace2 {
+	margin-left: 4px;
+	margin-top: 10px;
+	width: 138px;
+	height: 138px;
+	float: left;
+}
+
+#div1 p {
+	float: right;
+	margin-top: 10px;
+	font-size: 14px;
+	color: #fff;
+}
+
+.shadow { /*定义导航磁贴的盒子阴影  */
+	-moz-box-shadow: 0 0 5px #fff;
+	-webkit-box-shadow: 0 0 5px #fff;
+	box-shadow: 0 0 5px #fff;
+}
+/*导航样式end  */
+
+/*以下为轮播部分的样式  */
+#div3 {
+	margin-top: 7%;
+	float: right;
+	width: 40%;
+	height: 50%;
+}
+
+#div3 #dot { /*公告栏样式  */
+	float: left;
+	font-size: 23px;
+	margin-top: 10px;
+}
+
+#div3 #scroll_button {
+	width: 70%;
+	/* 	display: inline; */
+	margin-top: 10px; /*分别设置轮播按钮的上边距和左边距  */
+	margin-left: 150px;
+}
+/* 设置超链接的起点样式 */
+/* #div3 .scroll_content span{
+	font-size: 120px;
+	line-height: 32px;
+	height:32px;
+	display: inline;
+	} */
+#div3 a {
+	text-decoration: none;
+	line-height: 50px;
+	height: 50px;
+	margin-top: 10px;
+	color: #fff;
+}
+
+#div3 .scroll_content {
+	background-image: url("../../images/content_bg.png");
+	background-repeat: repeat;
+	width: 450px;
+	height: 31px;
+	margin-top: 15px;
+}
+
+#div3 .scroll_content>a {
+	line-height: 32px;
+	text-decoration: none;
+}
+
+#div3 #tile10 {
+	margin-left: -50px;
+	min-height:32px;
+	height: 510px;
+	width: 450px;
+	/*background-color: black; /**这儿会影响轮播的背景颜色**/
+}
+/*轮播部分的样式end  */
+#div4 {
+	width: 60%;
+	height: 12%;
+	float: right;
+	margin-top: -15px;
+}
+
+#div4 p {
+	font-size: 14px;
+	color: #fff;
+	text-align: center;
+	padding: 0px;
+	margin: 0px;
+}
+
+/*使左下角的方块中的内容居中*/
+.shadow > div{
+	text-align: center;
+}
+/*使滚动栏中的小点增加宽度*/
+.scroll_content > span{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#div3 .scroll_content a:HOVER{
+		text-decoration:underline;
+}
+.scroll_content > label {
+	padding-top: 4px;
+	float: right;
+}

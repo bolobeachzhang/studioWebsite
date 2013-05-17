@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="cn.edu.cdu.lab.model">
+	<class name="Message" table="Message" dynamic-insert="true" dynamic-update="true" lazy="false">
+ 		<id name="messageId">
+			<column name="messageId"></column>
+			<generator class="identity" />
+		</id>
+		<property name="messager">
+			<column name="messager" length="30"  not-null="true" ></column>
+		</property>
+		<property name="messageState"> 
+			<column name="messageState"  default="0" not-null="false"></column>
+		</property>
+		<property name="checkState"> 
+			<column name="checkState"  default="0" not-null="false"></column>
+		</property>
+		<property name="messageCon">
+			<column name="messageCon" length="2000" not-null="false"></column>
+		</property>
+		<property name="replyCon">
+			<column name="replyCon" length="2000" not-null="false"></column>
+		</property>
+		<property name="messageDate">
+			<column name="messageDate" length="2000" default="getdate()" not-null="false"></column>
+		</property>
+		<property name="replayDate">
+			<column name="replayDate" length="2000"  not-null="false"></column>
+		</property>
+		<property name="managerId">
+			<column name="managerId" length="30" not-null="false"></column>
+		</property>
+		<property name="teacherId">
+			<column name="teacherId" length="30" not-null="false"></column>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="cn.edu.cdu.lab.model">
+	<class name="Thesis" table="thesis" dynamic-insert="true" dynamic-update="true" lazy="false">  
+		<id name="id">
+			<column name="id"></column>
+			<generator class="identity" />
+		</id>
+		<property name="headLine">
+			<column name="headLine" length="200"  not-null="false" ></column>
+		</property>
+		<property name="type">
+			<column name="type" default="1" not-null="false"></column> 
+		</property>
+		<property name="journalTitle">
+			<column name="journalTitle" length="40" not-null="false"></column>
+		</property>
+		<property name="time" >
+			<column name="time" default="getDate()" not-null="false"></column>
+		</property>
+		<property name="author">
+			<column name="author" length="100" not-null="false"></column>
+		</property>
+		<property name="teacherId">
+			<column name="teacherId" length="30" not-null="false"></column>
+		</property>
+		<property name="url">
+			<column name="url" length="200" not-null="false"></column>
+		</property>
+		<property name="size">
+			<column name="size" length="10" not-null="false"></column>
+		</property>
+		<property name="format">
+			<column name="format"  length="10" not-null="false"></column>
+		</property>
+		
+		<property name="downloads">
+			<column name="downloads" not-null="false"></column>
+		</property>
+		<property name="digest">
+			<column name="digest" length="4000" not-null="false"></column>
+		</property>
+		<property name="downrole">
+			<column name="downrole" default="8" not-null="false"></column>
+		</property>
+		<property name="checkState">
+			<column name="checkState" default="0" not-null="false"></column>
+		</property>
+		
+	</class>
+</hibernate-mapping>

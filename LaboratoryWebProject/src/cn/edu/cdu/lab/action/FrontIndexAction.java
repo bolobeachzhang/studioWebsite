@@ -1,0 +1,420 @@
+/**
+ * @Title ManageAccessAction.java
+ * @Package cn.edu.cdu.lab.action
+ * @Description [简要描述本文件的作用] 本文件主要是处理全部人员登录和退出操作类 
+ * @author 李华 【643444070@qq.com】
+ * @Date 2013-3-12 12:39:10
+ * @Version 1.0
+ * 
+ */
+package cn.edu.cdu.lab.action;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
+import cn.edu.cdu.lab.model.AboutUs;
+import cn.edu.cdu.lab.model.Administrator;
+import cn.edu.cdu.lab.model.Article;
+import cn.edu.cdu.lab.model.Message;
+import cn.edu.cdu.lab.model.Register;
+import cn.edu.cdu.lab.model.Student;
+import cn.edu.cdu.lab.model.Teacher;
+import cn.edu.cdu.lab.service.ArticleManageService;
+import cn.edu.cdu.lab.service.ConnectionService;
+import cn.edu.cdu.lab.service.MessageService;
+import cn.edu.cdu.lab.service.PersonService;
+import cn.edu.cdu.lab.utils.BasicConstant;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+
+/**
+ * @ClassName: ManageAccessAction 
+ * @Description: 本文件主要是处理全部人员登录和退出操作类 
+ * @author 李华 【643444070@qq.com】
+ * @date 2013-2-27 12:39:40
+ *
+ */
+public class FrontIndexAction extends ActionSupport{
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	private HttpSession session; 
+	private ArticleManageService articleManageService;//文章显示的service方法注入
+	
+	
+	
+	public ArticleManageService getArticleManageService() {
+		return articleManageService;
+	}
+
+	public void setArticleManageService(ArticleManageService articleManageService) {
+		this.articleManageService = articleManageService;
+	}
+
+	private List<Message> messages;
+	private static AboutUs aboutUs;
+	private MessageService messageService;
+	private ConnectionService connectionService;
+	private PersonService personService;
+	private Register register;
+	
+	public Register getRegister() {
+		return register;
+	}
+
+	public void setRegister(Register register) {
+		this.register = register;
+	}
+
+	public void setPersonService(PersonService personService) {
+		this.personService = personService;
+	}
+
+	public void setConnectionService(ConnectionService connectionService) {
+		this.connectionService = connectionService;
+	}
+
+	public void setMessageService(MessageService messageService) {
+		this.messageService = messageService;
+	}
+	
+	/**
+	 * 跳转到登录页面
+	 * @return
+	 */
+	public String login(){
+		return "loginSuccess";
+	}
+	
+	/**
+	 * 跳转到后台的操作页面
+	 * @return
+	 */
+	public String manage(){
+		init();
+		int userType = Integer.parseInt(request.getSession().getAttribute("USER_TYPE").toString());
+		if(userType == BasicConstant.USER_TYPE_MANAGER){
+			return "MSuccess";
+		}
+		if(userType == BasicConstant.USER_TYPE_TEACHER){
+			return "TSuccess";
+		}
+		if(userType == BasicConstant.USER_TYPE_STUDENT){
+			return "SSuccess";
+		}
+		if(userType == BasicConstant.USER_TYPE_REGISTER){
+			return "RSuccess";
+		}
+		return NONE;
+	}
+	
+	/**
+	 * 验证用户登陆
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	public String checkLogin(){
+		init();
+		String verifyCode = request.getParameter("checkinput");
+		String sessionCode = request.getSession().getAttribute("SESSION_SECURITY_CODE").toString();
+		if(!verifyCode.equals(sessionCode)){ //验证码输入错误
+			try {
+				request.setAttribute("error", "验证码输入错误!");
+				return "loginError";
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		}
+		
+		String userid = request.getParameter("username"); //这里其实是用户的ID
+		String password = request.getParameter("password");
+		int type = Integer.parseInt(request.getParameter("choice"));
+		List list = personService.login(type, userid, password);
+		
+		if(list != null){ //登录成功
+			switch (type) {
+				case 16:
+					Administrator administrator = (Administrator) list.get(0);
+					request.getSession().setAttribute("USER_TYPE", BasicConstant.USER_TYPE_MANAGER); //登陆者类型
+					request.getSession().setAttribute("USER_ID", administrator.getAdminId()); //登陆者ID
+					request.getSession().setAttribute("USER_NAME", administrator.getName()); //登陆者名字
+					request.getSession().setAttribute("USER_LOGIN", BasicConstant.USER_LOGIN); //是否登录标志，已登录
+					break;
+				case 8:
+					Teacher teacher = (Teacher) list.get(0);
+					request.getSession().setAttribute("USER_TYPE", BasicConstant.USER_TYPE_TEACHER); //登陆者类型
+					request.getSession().setAttribute("USER_ID", teacher.getTeacherId()); //登陆者ID
+					request.getSession().setAttribute("USER_NAME", teacher.getName()); //登陆者名字
+					request.getSession().setAttribute("USER_LOGIN", BasicConstant.USER_LOGIN); //是否登录标志，已登录
+					break;
+				case 4:
+					Student student = (Student) list.get(0);
+					request.getSession().setAttribute("USER_TYPE", BasicConstant.USER_TYPE_STUDENT); //登陆者类型
+					request.getSession().setAttribute("USER_ID", student.getStudentId()); //登陆者ID
+					request.getSession().setAttribute("USER_NAME", student.getName()); //登陆者名字
+					request.getSession().setAttribute("USER_LOGIN", BasicConstant.USER_LOGIN); //是否登录标志，已登录
+					break;
+				case 2:
+					Register register =  (Register) list.get(0);
+					request.getSession().setAttribute("USER_TYPE", BasicConstant.USER_TYPE_REGISTER); //登陆者类型
+					request.getSession().setAttribute("USER_ID", register.getRegisterId()); //登陆者ID
+					request.getSession().setAttribute("USER_NAME", register.getName()); //登陆者名字
+					request.getSession().setAttribute("USER_LOGIN", BasicConstant.USER_LOGIN); //是否登录标志，已登录
+					break;
+			}
+			//成功跳转
+			return "checkLoginSuccess"; //先跳转首页去
+			
+		} else { //登录失败
+			try {
+				request.setAttribute("error", "登录失败，请检查用户名或者密码和用户类型");
+				return "loginError";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return NONE;
+	}
+	
+	/**
+	 * 跳转到注册页面
+	 * @return
+	 */
+	public String regist(){
+		
+		return "registSuccess";
+	}
+	
+	/**
+	 * 处理注册
+	 * @return
+	 */
+	public String getRegist(){
+		if(register != null){
+			personService.saveReister(register);
+		}
+		return "getRegistSuccess"; //注册成功跳转到登录页面
+	}
+	
+	/**
+	 * 退出登陆操作
+	 * @return
+	 */
+	public String logout(){
+		init();
+		session = request.getSession();
+		
+		//把登陆信息全部清除
+		session.removeAttribute("USER_TYPE");
+		session.removeAttribute("USER_ID");
+		session.removeAttribute("USER_NAME");
+		session.removeAttribute("USER_LOGIN");
+		
+		return "logoutSuccess";
+	}
+	
+	public String index(){
+		init();
+		if(request.getSession().getAttribute("USER_LOGIN") == null ||
+				request.getSession().getAttribute("USER_LOGIN").toString().equals("0")){
+			request.getSession().setAttribute("USER_TYPE", BasicConstant.USER_TYPE_VISITOR); //没有登录就是游客类型
+		}
+		
+		
+		//显示公告栏的信息  分别包括： 1.显示实验室概况     2. 最新动态    3.科研成果    4. 合作交流    5.公告
+		/**显示实验室概况   实验室介绍(2)  --》实验室概况(13)
+		 * 最新动态 (3)      
+		 * 科研成果  (6)
+		 * 合作交流 (4)
+		 * 通知公告(announcement) 在最新动态(3)下   通知公告的id=21
+		 */
+		//显示列表的方式  根据时间排列，显示前面3-5条列表即可
+		//实验室介绍
+		List<Article>  introduceList = articleManageService.getManyArticleByNavi(2, 0, 0);
+		List<Article>  introduceList1 = new ArrayList<Article>();
+		if(introduceList.size() > 5 )
+		{
+			for (int i =0;i < 5;i++) 
+			{
+				introduceList1.add(introduceList.get(i));
+			}
+			request.setAttribute("introduceList", introduceList1);
+		}
+		else
+		{
+			request.setAttribute("introduceList", introduceList);
+		}
+		
+		List<Article>  dynamicList = articleManageService.getManyArticleByNavi(3, 0, 0);
+		List<Article>  dynamicList1 = new ArrayList<Article>();
+		if(dynamicList.size() > 5 )
+		{
+			for (int i =0;i < 5;i++) 
+			{
+				dynamicList1.add(dynamicList.get(i));
+			}
+			request.setAttribute("dynamicList", dynamicList1);
+		}
+		else
+		{
+			request.setAttribute("dynamicList", dynamicList);
+		}
+		
+		List<Article>  achieveList = articleManageService.getManyArticleByNavi(6, 0, 0);
+		List<Article>  achieveList1 = new ArrayList<Article>();
+		if(achieveList.size() > 5 )
+		{
+			for (int i =0;i < 5;i++) 
+			{
+				achieveList1.add(achieveList.get(i));
+			}
+			request.setAttribute("achieveList", achieveList1);
+		}
+		else
+		{
+			request.setAttribute("achieveList", achieveList);
+		}
+		//合作交流
+		List<Article>  exchangeList =  articleManageService.getManyArticleByNavi(4, 0, 0);
+		List<Article>  exchangeList1 = new ArrayList<Article>();
+		if(exchangeList.size() > 5 )
+		{
+			for (int i =0;i < 5;i++) 
+			{
+				exchangeList1.add(exchangeList.get(i));
+			}
+			request.setAttribute("exchangeList", exchangeList1);
+		}
+		else
+		{
+			request.setAttribute("exchangeList", exchangeList);
+		}
+		//公告栏
+		List<Article>  announcementList = articleManageService.getManyArticleByNavi(3, 21, 0);
+		List<Article>  announcementList1 = new ArrayList<Article>();
+		if(announcementList.size() > 5 )
+		{
+			for (int i =0;i < 5;i++) 
+			{
+				announcementList1.add(announcementList.get(i));
+			}
+			request.setAttribute("announcementList", announcementList1);
+		}
+		else
+		{
+			request.setAttribute("announcementList", announcementList);
+		}
+		
+		if(aboutUs == null){ //获取首页显示的版权信息
+			aboutUs = connectionService.getConnenction();
+		}
+		request.setAttribute("aboutUs", aboutUs);
+		
+		return "indexSuccess";
+	}
+	
+	/**
+	 * 跳转到我要留言页面
+	 * @return
+	 */
+	public String getMessage(){
+		init();
+		int section = Integer.parseInt(request.getParameter("section"));
+		request.setAttribute("section", section);
+		return "getMessageSuccess";
+	}
+	
+	/**
+	 * 处理我要留言和联系我们
+	 * @return
+	 */
+	public String part(){
+		init();
+		int section = Integer.parseInt(request.getParameter("section"));
+		if(section == 1){ //我要留言
+			
+			int pageNow = 1;
+			int pageCount = 0;
+			int pageSize = 5;
+			messages = new ArrayList<Message>();
+			String userType = request.getSession().getAttribute("USER_TYPE").toString(); //获取查看用户类型
+			
+			if(request.getParameter("pageNow") != null){
+				pageNow = Integer.parseInt(request.getParameter("pageNow"));
+			}
+			
+			messages = messageService.getFrontMessage(Integer.parseInt(userType), pageSize*(pageNow - 1), pageSize);
+			pageCount = messageService.getFrontPageCount(Integer.parseInt(userType), pageSize);
+			
+			request.setAttribute("messages", messages);
+			request.setAttribute("pageCount", pageCount);
+			request.setAttribute("pageNow", pageNow);
+			
+			return "partOne";
+		}
+		if(section == 2){ //联系我们
+			
+			aboutUs = connectionService.getConnenction();
+			request.setAttribute("aboutUs", aboutUs);
+			
+			return "partTwo";
+		}
+		return NONE;
+	}
+	
+	/**
+	 * 验证码验证
+	 * @return
+	 */
+	public String verify(){
+		init();
+		String code = request.getParameter("code");
+		String sessionCode = request.getSession().getAttribute("SESSION_SECURITY_CODE").toString();
+		if(code.equals(sessionCode)){
+			try {
+				response.getWriter().write("ok");
+				response.flushBuffer();
+				response.getWriter().close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return NONE;
+	}
+	
+	public String subMessage(){
+		init();
+		String name = request.getParameter("name");
+		String content = request.getParameter("content");
+		System.out.println("name=" + name);
+		System.out.println("content=" + content);
+		Message message = new Message();
+		message.setMessager(name);
+		message.setMessageCon(content);
+		try {
+			messageService.saveMessage(message);
+			response.getWriter().write("ok");
+			response.flushBuffer();
+			response.getWriter().close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return NONE;
+	}
+	
+	public void init(){
+		ActionContext act =  ActionContext.getContext();
+		request = (HttpServletRequest) act.get(ServletActionContext.HTTP_REQUEST);
+		response = (HttpServletResponse) act.get(ServletActionContext.HTTP_RESPONSE);
+		response.setContentType("text/html");//设置返回相应格式，很重要 
+		response.setCharacterEncoding("utf-8");
+	}
+}

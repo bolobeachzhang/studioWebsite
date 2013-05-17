@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="cn.edu.cdu.lab.model">
+	<class name="Files" table="files">
+		<id name="id">
+			<column name="id"></column>
+			<generator class="identity" />
+		</id>
+		<property name="title">
+			<column name="title" length="20"  not-null="false" ></column>
+		</property>
+		<property name="fileName">
+			<column name="fileName" length="50" not-null="true"></column>
+		</property>
+		<property name="uploaderId">
+			<column name="uploaderId" length="30" not-null="true"></column>
+		</property>
+		<property name="uploaderName">
+			<column name="uploaderName" length="30" not-null="true"></column>
+		</property>
+		<property name="uploaderRole">
+			<column name="uploaderRole" not-null="true"></column>
+		</property>
+		<property name="downloaderRole">
+			<column name="downloaderRole" not-null="false"></column>
+		</property>
+		<property name="time">
+			<column name="time" default="getDate()" not-null="false"></column>
+		</property>
+		<property name="checks">
+			<column name="checks" not-null="false"></column>
+		</property>
+		<property name="size">
+			<column name="size" length="20" not-null="false"></column>
+		</property>
+		<property name="type">
+			<column name="type" not-null="true"></column>
+		</property>
+		<property name="fileUrl">
+			<column name="fileUrl" length="200" not-null="true"></column>
+		</property>
+		<property name="downloads">
+			<column name="downloads" not-null="false"></column>
+		</property>
+		
+	</class>
+</hibernate-mapping>

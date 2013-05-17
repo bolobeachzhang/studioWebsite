@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+<import resource="act_action.xml"/>
+<import resource="act_service.xml"/>
+    
+<!-- 定义jdbc.properties -->
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="location">
+		<value>classpath:jdbc.properties</value> <!-- 这里的路径问题要注意 -->
+	</property>
+	<property name="fileEncoding">
+		<value>UTF-8</value>
+	</property>
+</bean>
+
+
+<!-- 配置一个数据源  org.gjt.mm.mysql.Driver  com.mysql.jdbc.Driver-->
+<bean id="dataSource"
+	  class="org.apache.commons.dbcp.BasicDataSource"
+	  destroy-method="close">
+	<property name="driverClassName">
+		<value>${jdbc.driver}</value>
+	</property>
+	<property name="url">
+		<value>${jdbc.url}</value>
+	</property>
+	<property name="username">
+		<value>${jdbc.username}</value>
+	</property>
+	<property name="password">
+		<value>${jdbc.password}</value>
+	</property>
+</bean>
+
+<!-- 配置sessionFactory -->
+<bean id="sessionFactory"
+	  class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	   <property name="dataSource" ref="dataSource"/>
+	<property name="hibernateProperties">
+		<props>
+		 	
+		 	<!-- <prop key="hibernate.connection.driverClassName">${jdbc.driver}</prop>
+		    <prop key="hibernate.connection.url">${jdbc.url}</prop>
+		    <prop key="hibernate.connection.username">${jdbc.username}</prop>
+		    <prop key="hibernate.connection.password">${jdbc.password}</prop> -->
+		    
+			<!-- 数据库方言 -->
+			<!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>  for mysql-->
+			<!-- <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+			 -->
+			<prop key="hibernate.dialect">org.hibernate.dialect.SQLServer2008Dialect</prop>	
+			<!-- 显示sql语句 -->
+			<prop key="hibernate.current_session_context_class">thread</prop>
+			<!-- 这条语句是通过hibernate反射自动创建表 -->
+			<prop key="hibernate.hbm2ddl.auto">update</prop>
+			<!-- <prop key="hibernate.show_sql">true</prop> -->
+			<prop key="hibernate.format_sql">true</prop>
+			
+		</props>
+	</property>
+	<!-- 映射文件 -->
+	<property name="mappingLocations">
+		<list>
+		<!-- 	<value>classpath:cn/edu/cdu/lab/model/Article.hbm.xml</value> -->
+		<value>classpath:cn/edu/cdu/lab/model/*.hbm.xml</value>
+		</list>
+	</property>
+</bean>
+
+<!-- 注册aop：config
+<aop:config>
+	<aop:pointcut id="beforePointcut" expression="execution(* com.demo.lihua.dao.UserDAO.*(..))"/>
+	<aop:aspect id="before" ref="beforeAdvice">
+		<aop:before method="before" pointcut-ref="beforePointcut"/>
+	</aop:aspect>
+</aop:config>
+ -->
+<!-- 注册通知类
+<bean id="beforeAdvice" class="com.demo.lihua.aop.logging.LogingBeforeAdvice"/>
+ -->
+ <!--
+ 配置一个事务管理对象 
+-->
+<!-- <bean id="transactionManager"
+      class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource">
+		<ref local="dataSource"/>
+	</property>
+</bean -->
+<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory"/>
+		</property>
+</bean>
+<!--
+
+ 配置的视图解析器 
+-->
+<bean id="viewResolver"
+	  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	  <property name="viewClass">
+	  	<value>org.springframework.web.servlet.view.InternalResourceView</value>
+	  </property>
+	  <property name="prefix">
+	  	<value>/</value>
+	  </property>
+	  <property name="suffix">
+	  	<value>.jsp</value>
+	  </property>
+</bean>
+
+</beans>

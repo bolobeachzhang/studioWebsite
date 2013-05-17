@@ -1,0 +1,45 @@
+package cn.edu.cdu.lab.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class FrontAchieveAction extends ActionSupport{
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	
+	public String getAchieve(){
+		init();
+		String section = request.getParameter("section");
+		
+		request.setAttribute("section", section);
+		return "getAchieveSuccess";
+	}
+	
+	public String part(){
+		init();
+		int section = Integer.parseInt(request.getParameter("section"));
+		if(section == 1){
+			return "partOne";
+		}
+		if(section == 2){
+			return "partTwo";
+		}
+		if(section == 3){
+			return "partThree";
+		}
+		return NONE;
+	}
+	
+	public void init(){
+		ActionContext act =  ActionContext.getContext();
+		request = (HttpServletRequest) act.get(ServletActionContext.HTTP_REQUEST);
+		response = (HttpServletResponse) act.get(ServletActionContext.HTTP_RESPONSE);
+		response.setContentType("text/html");//设置返回相应格式，很重要 
+		response.setCharacterEncoding("utf-8");
+	}
+}

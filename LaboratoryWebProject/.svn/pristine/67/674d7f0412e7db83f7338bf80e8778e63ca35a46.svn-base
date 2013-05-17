@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <package name="manage" extends="struts-default">
+        
+    	
+    	<!--联系我们  -->
+    	<action name="manageConnectionAction_*" class="manageConnectionAction" method="{1}">
+    	    <result name="getSuccess">/WEB-INF/manage/connection.jsp</result>
+    	    <result name="updateSuccess" type="chain">manageConnectionAction_get</result>
+    	</action>
+    	
+    	<!--菜单管理  -->
+    	<action name="manageMenuAction_*" class="cn.edu.cdu.lab.action.ManageMenuAction" method="{1}">
+    	    <result name="mainPage">/WEB-INF/manage/menuManage.jsp</result>
+    	    <result name="getSuccess">/WEB-INF/manage/menuManageList.jsp</result>
+    	</action>
+    	<!--文章管理  -->
+    	<action name="manageArticleAction_*" class="manageArticleAction" method="{1}">
+    	    <result name="showSuccess">/WEB-INF/manage/articleManage.jsp</result>
+    	    <result name="addArticleSuccess">/WEB-INF/manage/articleAdd.jsp</result>
+    	    <result name="showEditArticle">/WEB-INF/manage/articleEdit.jsp</result>
+    	    <result name="articelAdd">/WEB-INF/manage/articleEdit.jsp</result>
+    	    <result name="showArticleIframe">/WEB-INF/manage/showArticle.jsp</result>
+    	    <result name="continueAddArticle">/WEB-INF/manage/articleAdd.jsp</result>
+    	</action>
+    	<!-- 文章添加 -->
+    	<action name="addArticle" class="manageArticleAction">
+    		<result name="continueAddArticle">/WEB-INF/manage/articleAdd.jsp</result>
+    	</action>
+    	
+    	<!-- 人员管理 -->
+    	<action name="managePersonAction_*" class="managePersonAction" method="{1}">
+    	    <result name="addSuccess">/WEB-INF/manage/personAdd.jsp</result>
+    	    <result name="managerManageSuccess">/WEB-INF/manage/personMManage.jsp</result>
+    	    <result name="teacherManageSuccess">/WEB-INF/manage/personTManage.jsp</result>
+    	    <result name="studentManageSuccess">/WEB-INF/manage/personSManage.jsp</result>
+    	    <result name="registerManageSuccess">/WEB-INF/manage/personRManage.jsp</result>
+    	    
+    	    <result name="updateTSuccess">/WEB-INF/manage/personTUpdate.jsp</result>
+    	    <result name="updateSSuccess">/WEB-INF/manage/personSUpdate.jsp</result>
+    	    <result name="updateRSuccess">/WEB-INF/manage/personRUpdate.jsp</result>
+    	</action>
+    	
+    	<action name="manageMessageAction_*" class="manageMessageAction" method="{1}">
+    	    <result name="showMUncheckSuccess">/WEB-INF/manage/messageMCheck.jsp</result>
+    	    <result name="showMUncheckedSuccess">/WEB-INF/manage/messageMChecked.jsp</result>
+    	    <result name="showTUncheckSuccess">/WEB-INF/manage/messageTCheck.jsp</result>
+    	    <result name="showTUncheckedSuccess">/WEB-INF/manage/messageTChecked.jsp</result>
+    	</action>
+    	<!-- 论坛管理 -->
+    	<action name="manageForumAction_*" class="manageForumAction" method="{1}">
+    	    <result name="getSuccess">/WEB-INF/manage/forumManage.jsp</result>
+    	    <result name="getOneSuccess">/WEB-INF/manage/forumShow.jsp</result>
+    	    <result name="showTopic_content">/WEB-INF/manage/forumShow.jsp</result>
+    	    <result name="afterDe_T" type="chain">manageForumAction_showTopicThemeByPage</result>
+    	    <result name="afterDe_C" type="chain">manageForumAction_getTopic_content</result>
+    	</action>
+    	
+    	<action name="manageFileAction_*" class="manageFileAction" method="{1}">
+    	    <result name="getMSuccess">/WEB-INF/manage/fileM.jsp</result>
+    	    <result name="listFiles">/WEB-INF/manage/fileMList.jsp</result>
+    	    <result name="uploadSuccess">/WEB-INF/manage/fileUpload.jsp</result>
+    	    
+    	    <result name="download" type="stream"> 
+                <param name="contentType">application/octet-stream</param>  
+                <param name="inputName">inputStream</param> 
+                <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>  
+                <param name="bufferSize">50*1024*1024</param> 
+            </result> 
+    	</action>
+    	
+    	<action name="manageThesisAction_*" class="manageThesisAction" method="{1}">
+    	    <result name="getMSuccess">/WEB-INF/manage/thesisMManage.jsp</result>
+    	    <result name="getTSuccess">/WEB-INF/manage/thesisTManage.jsp</result>
+    	    <result name="uploadSuccess">/WEB-INF/manage/thesisTUpload.jsp</result>
+    	    <result name="updateSuccess">/WEB-INF/manage/thesisTUpdate.jsp</result>
+    	</action>
+    	
+    	<action name="managePasswordAction_*" class="managePasswordAction" method="{1}">
+    	    <result name="getSuccess">/WEB-INF/manage/passwordManage.jsp</result>
+    	</action>
+    	
+    	
+    </package>
+
+</struts>
