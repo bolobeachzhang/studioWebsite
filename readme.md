@@ -12,14 +12,14 @@ studioWebsite
 目录结构
  -----------------------------------
 
-    cn.edu.cdu.lab.action -- 表示属于action层用来作为控制器<br/>
-    cn.edu.cdu.lab.dao -- dao层用来访问数据库，进行数据库的一些基本的操作<br/>
-    cn.edu.cdu.lab.dao.impl -- dao层的接口实现类层，是详细用来操作数据库<br/>
-    cn.edu.cdu.lab.model -- model层，就是一个javaBean，主要功能是用来存储数据<br/>
-    cn.edu.cdu.lab.service -- service接口层,用来声明service层的方法主体<br/>
-    cn.edu.cdu.lab.service.impl -- service实现类层，用来实现service里面主体的方法<br/>
-    cn.edu.cdu.lab.utils -- util层，是常用的一些工具类，比如说加密，以及验证码and more <br/>
-    下面就是一些基本的配置，源码里面有详细的介绍，在这里我就不啰嗦了。<br/>
+    cn.edu.cdu.lab.action -- 表示属于action层用来作为控制器
+    cn.edu.cdu.lab.dao -- dao层用来访问数据库，进行数据库的一些基本的操作
+    cn.edu.cdu.lab.dao.impl -- dao层的接口实现类层，是详细用来操作数据库
+    cn.edu.cdu.lab.model -- model层，就是一个javaBean，主要功能是用来存储数据
+    cn.edu.cdu.lab.service -- service接口层,用来声明service层的方法主体
+    cn.edu.cdu.lab.service.impl -- service实现类层，用来实现service里面主体的方法
+    cn.edu.cdu.lab.utils -- util层，是常用的一些工具类，比如说加密，以及验证码and more 
+    下面就是一些基本的配置，源码里面有详细的介绍，在这里我就不啰嗦了。
 
 ### 关于本项目所采用的技术
   小标题类似html的\<h3\><br />
