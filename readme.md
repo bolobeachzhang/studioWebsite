@@ -24,31 +24,11 @@ studioWebsite
 ### 链接
 1.[点击这里你可以链接到www.google.com](http://www.google.com)<br />
 2.[点击这里你可以链接到我的博客](http://bolobeach.blogspot.com/)<br />
-3.如果有宝贵的意见请给我发邮件(bolobeach@gmail.com)<br/>
+3.[点击这里下载源码(liunx,windows)](http://bolobeachzhang.github.io/studioWebsite/)<br/>
+4.如果有宝贵的意见请给我发邮件(bolobeach@gmail.com)<br/>
 
 ###主界面展示
 ![github](https://raw.github.com/bolobeachzhang/studioWebsite/master/images/main.jpg "github")
 
 ###论文展示
-[![github](https://raw.github.com/bolobeachzhang/studioWebsite/master/images/title.jpg "github")
-
-### 文字被些字符包围
-> 文字被些字符包围
->
-> 只要再文字前面加上>空格即可
->
-> 如果你要换行的话,新起一行,输入>空格即可,后面不接文字
-> 但> 只能放在行首才有效
-
-### 文字被些字符包围,多重包围
-> 文字被些字符包围开始
->
-> > 只要再文字前面加上>空格即可
->
->  > > 如果你要换行的话,新起一行,输入>空格即可,后面不接文字
->
-> > > > 但> 只能放在行首才有效
-
-### 特殊字符处理
-有一些特殊字符如<,#等,只要在特殊字符前面加上转义字符\即可<br />
-你想换行的话其实可以直接用html标签\<br /\>
+![github](https://raw.github.com/bolobeachzhang/studioWebsite/master/images/title.jpg "github")
