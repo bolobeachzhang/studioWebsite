@@ -17,6 +17,7 @@ studioWebsite
   cn.edu.cdu.lab.service.impl -- service实现类层，用来实现service里面主体的方法
   cn.edu.cdu.lab.utils -- util层，是常用的一些工具类，比如说加密，以及验证码and more 
   下面就是一些基本的配置，源码里面有详细的介绍，在这里我就不啰嗦了。
+
 ### 关于本项目所采用的技术
   小标题类似html的\<h3\><br />
   小标题的格式如下 ### 小标题<br />
