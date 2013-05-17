@@ -27,10 +27,10 @@ studioWebsite
 3.如果有宝贵的意见请给我发邮件(bolobeach@gmail.com)<br/>
 
 ###主界面展示
-![github](https://github.com/bolobeachzhang/studioWebsite/blob/master/images/main.jpg "github")
+![github](https://raw.github.com/bolobeachzhang/studioWebsite/master/images/main.jpg "github")
 
 ###论文展示
-[![image]](https://github.com/bolobeachzhang/studioWebsite/blob/master/images/title.jpg)
+[![github](https://raw.github.com/bolobeachzhang/studioWebsite/master/images/title.jpg "github")
 
 ### 文字被些字符包围
 > 文字被些字符包围
