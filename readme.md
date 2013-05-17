@@ -1,4 +1,4 @@
-studioWebsite
+studioWebsite(由团队中李XX，谭XX，刘XX and more 完成)
 ===================================
   studioWebsite是四川省模式识别与智能信息处理研究实验室网站，基于论文管理，教师，学生进行多功能的网站，包含资料阅读，上传下载。<br />
   
