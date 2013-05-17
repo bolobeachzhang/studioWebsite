@@ -1,87 +1,108 @@
-<!doctype html>
-<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
-<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
 
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
-  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
 
-  <title>Studiowebsite</title>
-  <meta name="description" content="四川省模式识别与智能信息处理工作室网站，是一个基于实验室类型的网站，有论文，成果，以及教师和学生管理，包含上传或者下载。">
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Studiowebsite by bolobeachzhang</title>
+  </head>
 
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <body>
+    <a id="forkme_banner" href="https://github.com/bolobeachzhang/studioWebsite">View on GitHub</a>
+    <div class="shell">
 
-</head>
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Studiowebsite</h1>
+            <h2>四川省模式识别与智能信息处理工作室网站，是一个基于实验室类型的网站，有论文，成果，以及教师和学生管理，包含上传或者下载。</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
 
-<body>
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/bolobeachzhang/studioWebsite/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/bolobeachzhang/studioWebsite/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
 
-  <div class="wrapper">
-    <header>
-      <h1 class="title">Studiowebsite</h1>
-    </header>
-    <div id="container">
-      <p class="tagline">四川省模式识别与智能信息处理工作室网站，是一个基于实验室类型的网站，有论文，成果，以及教师和学生管理，包含上传或者下载。</p>
-      <div id="main" role="main">
-        <div class="download-bar">
-        <div class="inner">
-          <a href="https://github.com/bolobeachzhang/studioWebsite/tarball/master" class="download-button tar"><span>Download</span></a>
-          <a href="https://github.com/bolobeachzhang/studioWebsite/zipball/master" class="download-button zip"><span>Download</span></a>
-          <a href="https://github.com/bolobeachzhang/studioWebsite" class="code">View Studiowebsite on GitHub</a>
-        </div>
-        <span class="blc"></span><span class="trc"></span>
-        </div>
-        <article class="markdown-body">
-          <h3>Welcome to GitHub Pages.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+      <span class="banner-fix"></span>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+
+      <section id="main_content">
+        <h1>studioWebsite</h1>
+
+<p>studioWebsite是四川省模式识别与智能信息处理研究实验室网站，基于论文管理，教师，学生进行多功能的网站，包含资料阅读，上传下载。<br></p>
+
+<p>关于本项目所采用的技术</p>
+
+<hr><ol>
+<li>MVC:传统的MVC模式来进行开发（struts+hibernate+spring）<br>
+</li>
+<li>Database:sqlserver 2008 <br>
+</li>
+<li>IDE :eclipse <br>
+</li>
+<li>test:junit(4.0) <br>
+</li>
+</ol><p>目录结构</p>
+
+<hr><pre><code>cn.edu.cdu.lab.action -- 表示属于action层用来作为控制器
+cn.edu.cdu.lab.dao -- dao层用来访问数据库，进行数据库的一些基本的操作
+cn.edu.cdu.lab.dao.impl -- dao层的接口实现类层，是详细用来操作数据库
+cn.edu.cdu.lab.model -- model层，就是一个javaBean，主要功能是用来存储数据
+cn.edu.cdu.lab.service -- service接口层,用来声明service层的方法主体
+cn.edu.cdu.lab.service.impl -- service实现类层，用来实现service里面主体的方法
+cn.edu.cdu.lab.utils -- util层，是常用的一些工具类，比如说加密，以及验证码and more 
+下面就是一些基本的配置，源码里面有详细的介绍，在这里我就不啰嗦了。
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<h3>链接</h3>
 
-<h3>Designer Templates</h3>
+<p>1.<a href="http://www.google.com">点击这里你可以链接到www.google.com</a><br>
+2.<a href="http://bolobeach.blogspot.com/">点击这里你可以链接到我的博客</a><br>
+3.<a href="http://bolobeachzhang.github.io/studioWebsite/">点击这里下载源码(liunx,windows)</a><br>
+4.如果有宝贵的意见请给我发邮件(<a href="mailto:bolobeach@gmail.com">bolobeach@gmail.com</a>)<br></p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<h3>主界面展示</h3>
 
-<h3>Rather Drive Stick?</h3>
+<p><img src="https://raw.github.com/bolobeachzhang/studioWebsite/master/images/main.jpg" alt="github" title="github"></p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<h3>论文展示</h3>
 
-<h3>Authors and Contributors</h3>
+<p><img src="https://raw.github.com/bolobeachzhang/studioWebsite/master/images/title.jpg" alt="github" title="github"></p>
+      </section>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/bolobeachzhang">bolobeachzhang</a> can be found on <a href="https://github.com/bolobeachzhang/studioWebsite">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
 
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </article>
-      </div>
     </div>
-    <footer>
-      <div class="owner">
-      <p><a href="https://github.com/bolobeachzhang" class="avatar"><img src="https://secure.gravatar.com/avatar/d6e7c9e69fbbe1f50aa669ecae992ce0?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/bolobeachzhang">bolobeachzhang</a> maintains <a href="https://github.com/bolobeachzhang/studioWebsite">Studiowebsite</a></p>
 
-
-      </div>
-      <div class="creds">
-        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
-      </div>
-    </footer>
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/bolobeachzhang/studioWebsite/tarball/master" class="tar">tar</a><a href="https://github.com/bolobeachzhang/studioWebsite/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
-  </div>
-
-  
-</body>
+    
+  </body>
 </html>
