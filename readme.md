@@ -8,6 +8,7 @@ studioWebsite
   2. Database:sqlserver 2008 <br />
   3. IDE :eclipse <br/>
   4. test:junit(4.0) <br/>
+
 ### 目录结构
     cn.edu.cdu.lab.action -- 表示属于action层用来作为控制器<br/>
     cn.edu.cdu.lab.dao -- dao层用来访问数据库，进行数据库的一些基本的操作<br/>
