@@ -26,7 +26,8 @@ studioWebsite(由团队中李XX，谭XX，刘XX and more 完成)
 2.[点击这里你可以链接到我的博客](http://bolobeach.blogspot.com/)<br />
 3.[点击这里下载源码(liunx,windows)](http://bolobeachzhang.github.io/studioWebsite/)<br/>
 4.如果有宝贵的意见请给我发邮件(bolobeach@gmail.com)<br/>
-5.谭XX的邮箱(tanxiujiang@sina.com)<br/>
+5.谭XX的邮箱(tanxiujiang@sina.cn)<br/>
+6.李XX的邮箱(lihuabest@gmail.com)<br/>
 
 ###主界面展示
 ![github](https://raw.github.com/bolobeachzhang/studioWebsite/master/images/main.jpg "github")
